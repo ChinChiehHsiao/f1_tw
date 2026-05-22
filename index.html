@@ -202,30 +202,30 @@ const COLORS = {
 };
 
 const RACE_META = {
-  'Australian Grand Prix':    { n:'澳洲' },
-  'Chinese Grand Prix':       { n:'中國' },
-  'Japanese Grand Prix':      { n:'日本' },
-  'Bahrain Grand Prix':       { n:'巴林' },
-  'Saudi Arabian Grand Prix': { n:'沙烏地' },
-  'Miami Grand Prix':         { n:'邁阿密' },
-  'Canadian Grand Prix':      { n:'加拿大' },
-  'Monaco Grand Prix':        { n:'摩納哥' },
-  'Spanish Grand Prix':       { n:'西班牙' },
-  'Austrian Grand Prix':      { n:'奧地利' },
-  'British Grand Prix':       { n:'英國' },
-  'Belgian Grand Prix':       { n:'比利時' },
-  'Hungarian Grand Prix':     { n:'匈牙利' },
-  'Dutch Grand Prix':         { n:'荷蘭' },
-  'Italian Grand Prix':       { n:'義大利' },
-  'Azerbaijan Grand Prix':    { n:'亞塞拜然' },
-  'Singapore Grand Prix':     { n:'新加坡' },
-  'United States Grand Prix': { n:'美國' },
-  'Mexico City Grand Prix':   { n:'墨西哥' },
-  'São Paulo Grand Prix':     { n:'巴西' },
-  'Las Vegas Grand Prix':     { n:'拉斯維加斯' },
-  'Qatar Grand Prix':         { n:'卡達' },
-  'Abu Dhabi Grand Prix':     { n:'阿布達比' },
-  'Madrid Grand Prix':        { n:'馬德里' }
+  'Australian Grand Prix':    '澳洲',
+  'Chinese Grand Prix':       '中國',
+  'Japanese Grand Prix':      '日本',
+  'Bahrain Grand Prix':       '巴林',
+  'Saudi Arabian Grand Prix': '沙烏地',
+  'Miami Grand Prix':         '邁阿密',
+  'Canadian Grand Prix':      '加拿大',
+  'Monaco Grand Prix':        '摩納哥',
+  'Spanish Grand Prix':       '西班牙',
+  'Austrian Grand Prix':      '奧地利',
+  'British Grand Prix':       '英國',
+  'Belgian Grand Prix':       '比利時',
+  'Hungarian Grand Prix':     '匈牙利',
+  'Dutch Grand Prix':         '荷蘭',
+  'Italian Grand Prix':       '義大利',
+  'Azerbaijan Grand Prix':    '亞塞拜然',
+  'Singapore Grand Prix':     '新加坡',
+  'United States Grand Prix': '美國',
+  'Mexico City Grand Prix':   '墨西哥',
+  'São Paulo Grand Prix':     '巴西',
+  'Las Vegas Grand Prix':     '拉斯維加斯',
+  'Qatar Grand Prix':         '卡達',
+  'Abu Dhabi Grand Prix':     '阿布達比',
+  'Madrid Grand Prix':        '馬德里'
 };
 
 const SESSION_LABEL = {
@@ -246,7 +246,7 @@ const BASE = 'https://api.jolpi.ca/ergast/f1/2026';
 function el(id) { return document.getElementById(id); }
 
 function raceName(name) {
-  return (RACE_META[name] || {}).n || name.replace(' Grand Prix', '');
+  return RACE_META[name] || name.replace(' Grand Prix', '');
 }
 
 function toTW(dateStr, timeStr) {
@@ -332,8 +332,8 @@ function renderStandings(dList, cList) {
     const pts = parseFloat(d.points);
     const pct = Math.round(pts / maxD * 100);
     const col = COLORS[d.Constructors[0] ? d.Constructors[0].constructorId : ''] || '#888';
-    var fullName = d.Driver.givenName + ' ' + d.Driver.familyName;
-    var winBadge = parseInt(d.wins) > 0 ? ' <span class="badge b-ok" style="font-size:10px;padding:1px 5px">' + d.wins + '勝</span>' : '';
+    const fullName = d.Driver.givenName + ' ' + d.Driver.familyName;
+    const winBadge = parseInt(d.wins) > 0 ? ' <span class="badge b-ok" style="font-size:10px;padding:1px 5px">' + d.wins + '勝</span>' : '';
     return '<tr>'
       + '<td class="dim">' + d.position + '</td>'
       + '<td><span class="dot" style="background:' + col + '"></span>' + fullName + winBadge + '</td>'
@@ -346,7 +346,7 @@ function renderStandings(dList, cList) {
   const top = dList[0];
   const gap = dList[1] ? parseFloat(top ? top.points : 0) - parseFloat(dList[1].points) : 0;
   el('stat-grid').innerHTML =
-    '<div class="stat"><div class="stat-label">領跑車手</div><div class="stat-val">' + (top ? top.Driver.familyName : '-') + '</div><div class="stat-sub">' + (top ? top.points : 0) + ' 分</div></div>'
+    '<div class="stat"><div class="stat-label">領跑車手</div><div class="stat-val" style="font-size:14px">' + (top ? top.Driver.givenName + ' ' + top.Driver.familyName : '-') + '</div><div class="stat-sub">' + (top ? top.points : 0) + ' 分</div></div>'
     + '<div class="stat"><div class="stat-label">領先差距</div><div class="stat-val">+' + gap + '</div><div class="stat-sub">vs ' + (dList[1] ? dList[1].Driver.familyName : '-') + '</div></div>'
     + '<div class="stat"><div class="stat-label">領跑車隊</div><div class="stat-val" style="font-size:14px">' + (cList[0] ? cList[0].Constructor.name : '-') + '</div><div class="stat-sub">' + (cList[0] ? cList[0].points : 0) + ' 分</div></div>';
 
@@ -367,7 +367,11 @@ function renderStandings(dList, cList) {
 // ---- 賽程 ----
 async function loadCalendar() {
   const cached = getCache('f1_c26', 86400000);
-  if (cached) { renderCalendar(cached.data); renderNext(cached.data); return; }
+  if (cached) {
+    renderCalendar(cached.data);
+    renderNext(cached.data);
+    return;
+  }
   try {
     const res = await apiFetch('.json');
     const races = res.MRData.RaceTable.Races;
