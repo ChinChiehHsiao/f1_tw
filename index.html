@@ -53,7 +53,6 @@ tr:hover td{background:var(--bg2)}
 .b-ok{background:var(--green-bg);color:var(--green-text)}
 .b-no{background:var(--gray-bg);color:var(--gray-text)}
 .b-sprint{background:var(--amber-bg);color:var(--amber-text)}
-/* .b-now and .b-done are aliases — use .b-ok and .b-no directly */
 .dim{color:var(--text2);font-size:12px}
 .loading{color:var(--text2);font-size:13px;padding:18px;text-align:center}
 .error-box{color:var(--red-text);background:var(--red-bg);border-radius:var(--radius);padding:10px 14px;font-size:13px;margin-bottom:10px}
@@ -92,7 +91,6 @@ a:hover{text-decoration:underline}
 
 <div class="content">
 
-  <!-- 積分榜 -->
   <div class="panel active" id="panel-standings">
     <div id="err-standings"></div>
     <div class="stat-grid" id="stat-grid">
@@ -127,25 +125,23 @@ a:hover{text-decoration:underline}
     <div class="note" id="standings-time"></div>
   </div>
 
-  <!-- 賽程 -->
   <div class="panel" id="panel-calendar">
     <div id="err-calendar"></div>
     <div class="card">
       <table>
         <thead><tr>
-          <th style="width:32px">R</th>
+          <th style="width:32px">站</th>
           <th>賽站</th>
           <th style="width:48px">日期</th>
           <th style="width:116px">正賽台灣時間</th>
           <th style="width:48px"></th>
         </tr></thead>
-        <tbody id="tb-calendar"><tr><td colspan="6" class="loading">載入中...</td></tr></tbody>
+        <tbody id="tb-calendar"><tr><td colspan="5" class="loading">載入中...</td></tr></tbody>
       </table>
     </div>
-    <div class="note">* 台灣時間 = UTC+8 自動換算。未公布時間顯示「待公布」。S = 衝刺週。</div>
+    <div class="note">* 台灣時間 = UTC+8 自動換算。S = 衝刺週。</div>
   </div>
 
-  <!-- 本站轉播 -->
   <div class="panel" id="panel-nextrace">
     <div id="err-nextrace"></div>
     <div id="next-header"></div>
@@ -164,7 +160,6 @@ a:hover{text-decoration:underline}
     <div class="note">FP 自由練習需要 MAX 台，其餘場次在體育1台播出（偶爾會換2/3/4台，以 ELTA 官網節目表為準）。</div>
   </div>
 
-  <!-- 說明 -->
   <div class="panel" id="panel-guide">
     <div class="section-label">你可以看的（體育1-4台）</div>
     <div class="card card-body">
@@ -192,250 +187,268 @@ a:hover{text-decoration:underline}
     </div>
     <div class="section-label">部署說明</div>
     <div class="card card-body" style="line-height:2;color:var(--text2)">
-      1. 把這個 index.html 上傳到 GitHub repo<br>
-      2. Settings → Pages → Deploy from branch → main → Save<br>
-      3. 網址：https://你的帳號.github.io/repo名稱<br>
-      4. 完全免費，資料全部自動更新，不需要手動維護
+      網址：<a href="https://chinchiehhsiao.github.io/f1_tw" target="_blank">chinchiehhsiao.github.io/f1_tw</a><br>
+      部署：GitHub Pages · 完全免費 · push 後自動更新
     </div>
   </div>
 
 </div>
 
 <script>
-// ---- 單一顏色表（以 constructorId 為 key）----
-const COLORS={
-  mercedes:'#00B8D4',ferrari:'#E8002D',mclaren:'#FF8000',
-  red_bull:'#3671C6',haas:'#B6BABD',alpine:'#0093CC',
-  rb:'#6692FF',williams:'#64C4FF',audi:'#BBB500',
-  cadillac:'#CC4B00',aston_martin:'#229971'
+const COLORS = {
+  mercedes:'#00B8D4', ferrari:'#E8002D', mclaren:'#FF8000',
+  red_bull:'#3671C6', haas:'#B6BABD', alpine:'#0093CC',
+  rb:'#6692FF', williams:'#64C4FF', audi:'#BBB500',
+  cadillac:'#CC4B00', aston_martin:'#229971'
 };
 
-// ---- 合併 FLAGS + SHORT_NAME 成一張表 ----
-const RACE_META={
-  'Australian Grand Prix':   {c:'AU',n:'澳洲'},
-  'Chinese Grand Prix':      {c:'CN',n:'中國'},
-  'Japanese Grand Prix':     {c:'JP',n:'日本'},
-  'Bahrain Grand Prix':      {c:'BH',n:'巴林'},
-  'Saudi Arabian Grand Prix':{c:'SA',n:'沙烏地'},
-  'Miami Grand Prix':        {c:'US',n:'邁阿密'},
-  'Canadian Grand Prix':     {c:'CA',n:'加拿大'},
-  'Monaco Grand Prix':       {c:'MC',n:'摩納哥'},
-  'Spanish Grand Prix':      {c:'ES',n:'西班牙'},
-  'Austrian Grand Prix':     {c:'AT',n:'奧地利'},
-  'British Grand Prix':      {c:'GB',n:'英國'},
-  'Belgian Grand Prix':      {c:'BE',n:'比利時'},
-  'Hungarian Grand Prix':    {c:'HU',n:'匈牙利'},
-  'Dutch Grand Prix':        {c:'NL',n:'荷蘭'},
-  'Italian Grand Prix':      {c:'IT',n:'義大利'},
-  'Azerbaijan Grand Prix':   {c:'AZ',n:'亞塞拜然'},
-  'Singapore Grand Prix':    {c:'SG',n:'新加坡'},
-  'United States Grand Prix':{c:'US',n:'美國'},
-  'Mexico City Grand Prix':  {c:'MX',n:'墨西哥'},
-  'São Paulo Grand Prix':    {c:'BR',n:'巴西'},
-  'Las Vegas Grand Prix':    {c:'LV',n:'拉斯維加斯'},
-  'Qatar Grand Prix':        {c:'QA',n:'卡達'},
-  'Abu Dhabi Grand Prix':    {c:'AE',n:'阿布達比'},
-  'Madrid Grand Prix':       {c:'MD',n:'馬德里'},
+const RACE_META = {
+  'Australian Grand Prix':    { n:'澳洲' },
+  'Chinese Grand Prix':       { n:'中國' },
+  'Japanese Grand Prix':      { n:'日本' },
+  'Bahrain Grand Prix':       { n:'巴林' },
+  'Saudi Arabian Grand Prix': { n:'沙烏地' },
+  'Miami Grand Prix':         { n:'邁阿密' },
+  'Canadian Grand Prix':      { n:'加拿大' },
+  'Monaco Grand Prix':        { n:'摩納哥' },
+  'Spanish Grand Prix':       { n:'西班牙' },
+  'Austrian Grand Prix':      { n:'奧地利' },
+  'British Grand Prix':       { n:'英國' },
+  'Belgian Grand Prix':       { n:'比利時' },
+  'Hungarian Grand Prix':     { n:'匈牙利' },
+  'Dutch Grand Prix':         { n:'荷蘭' },
+  'Italian Grand Prix':       { n:'義大利' },
+  'Azerbaijan Grand Prix':    { n:'亞塞拜然' },
+  'Singapore Grand Prix':     { n:'新加坡' },
+  'United States Grand Prix': { n:'美國' },
+  'Mexico City Grand Prix':   { n:'墨西哥' },
+  'São Paulo Grand Prix':     { n:'巴西' },
+  'Las Vegas Grand Prix':     { n:'拉斯維加斯' },
+  'Qatar Grand Prix':         { n:'卡達' },
+  'Abu Dhabi Grand Prix':     { n:'阿布達比' },
+  'Madrid Grand Prix':        { n:'馬德里' }
 };
 
-const SESSION_LABEL={
-  FirstPractice:'FP1 自由練習',SecondPractice:'FP2 自由練習',
-  ThirdPractice:'FP3 自由練習',SprintQualifying:'衝刺排位賽 SQ',
-  Sprint:'衝刺賽',Qualifying:'排位賽 Q',Race:'正賽'
+const SESSION_LABEL = {
+  FirstPractice:   'FP1 自由練習',
+  SecondPractice:  'FP2 自由練習',
+  ThirdPractice:   'FP3 自由練習',
+  SprintQualifying:'衝刺排位賽 SQ',
+  Sprint:          '衝刺賽',
+  Qualifying:      '排位賽 Q',
+  Race:            '正賽'
 };
-const SESSION_ORDER=['FirstPractice','SecondPractice','ThirdPractice','SprintQualifying','Sprint','Qualifying','Race'];
-const AVAILABLE=new Set(['SprintQualifying','Sprint','Qualifying','Race']);
-const DAYS=['日','一','二','三','四','五','六'];
-const BASE='https://api.jolpi.ca/ergast/f1/2026';
+const SESSION_ORDER = ['FirstPractice','SecondPractice','ThirdPractice','SprintQualifying','Sprint','Qualifying','Race'];
+const AVAILABLE = new Set(['SprintQualifying','Sprint','Qualifying','Race']);
+const DAYS = ['日','一','二','三','四','五','六'];
+const BASE = 'https://api.jolpi.ca/ergast/f1/2026';
 
-// ---- 工具函式 ----
-function toTW(dateStr,timeStr){
-  if(!timeStr) return '待公布';
-  const u=new Date(dateStr+'T'+timeStr);
-  if(isNaN(u)) return '待公布';
-  const t=new Date(u.getTime()+8*3600000);
-  const m=t.getUTCMonth()+1, d=t.getUTCDate();
-  const h=String(t.getUTCHours()).padStart(2,'0');
-  const mi=String(t.getUTCMinutes()).padStart(2,'0');
-  return`${m}/${d}(${DAYS[t.getUTCDay()]}) ${h}:${mi}`;
-}
-function fmtDate(s){
-  const d=new Date(s+'T00:00:00Z');
-  return`${d.getUTCMonth()+1}/${d.getUTCDate()}`;
-}
-function isPast(date,time){
-  return new Date(time?date+'T'+time:date+'T23:59:59Z')<new Date();
-}
-function hasSprint(r){return!!(r.Sprint||r.SprintQualifying)}
-function raceMeta(name){return RACE_META[name]||{c:'--',n:name.replace(' Grand Prix','')}}
+// ---- 工具 ----
+function el(id) { return document.getElementById(id); }
 
-function getCache(k,maxMs){
-  try{
-    const i=localStorage.getItem(k);
-    if(!i) return null;
-    const{data,ts}=JSON.parse(i);
-    return Date.now()-ts>maxMs?null:{data,ts};
-  }catch{return null;}
+function raceName(name) {
+  return (RACE_META[name] || {}).n || name.replace(' Grand Prix', '');
 }
-function setCache(k,data){
-  try{localStorage.setItem(k,JSON.stringify({data,ts:Date.now()}));}catch{}
+
+function toTW(dateStr, timeStr) {
+  if (!timeStr) return '待公布';
+  const u = new Date(dateStr + 'T' + timeStr);
+  if (isNaN(u)) return '待公布';
+  const t = new Date(u.getTime() + 8 * 3600000);
+  const m = t.getUTCMonth() + 1, d = t.getUTCDate();
+  const h = String(t.getUTCHours()).padStart(2, '0');
+  const mi = String(t.getUTCMinutes()).padStart(2, '0');
+  return m + '/' + d + '(' + DAYS[t.getUTCDay()] + ') ' + h + ':' + mi;
 }
-async function apiFetch(path){
-  const ctrl=new AbortController();
-  const timer=setTimeout(()=>ctrl.abort(),10000);
-  try{
-    const r=await fetch(BASE+path,{signal:ctrl.signal});
-    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+
+function fmtDate(s) {
+  const d = new Date(s + 'T00:00:00Z');
+  return (d.getUTCMonth() + 1) + '/' + d.getUTCDate();
+}
+
+function isPast(date, time) {
+  return new Date(time ? date + 'T' + time : date + 'T23:59:59Z') < new Date();
+}
+
+function hasSprint(r) { return !!(r.Sprint || r.SprintQualifying); }
+
+function getCache(k, maxMs) {
+  try {
+    const i = localStorage.getItem(k);
+    if (!i) return null;
+    const obj = JSON.parse(i);
+    return Date.now() - obj.ts > maxMs ? null : obj;
+  } catch (e) { return null; }
+}
+
+function setCache(k, data) {
+  try { localStorage.setItem(k, JSON.stringify({ data: data, ts: Date.now() })); } catch (e) {}
+}
+
+async function apiFetch(path) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(function() { ctrl.abort(); }, 10000);
+  try {
+    const r = await fetch(BASE + path, { signal: ctrl.signal });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
-  }catch(e){
-    if(e.name==='AbortError') throw new Error('API 逾時（10 秒），請稍後重試');
+  } catch (e) {
+    if (e.name === 'AbortError') throw new Error('API 逾時（10秒），請稍後重試');
     throw e;
-  }finally{
+  } finally {
     clearTimeout(timer);
   }
 }
-function el(id){return document.getElementById(id)}
 
 // ---- 積分榜 ----
-async function loadStandings(){
-  const cached=getCache('f1_s26',3600000);
-  if(cached){
-    renderStandings(cached.data.d,cached.data.c);
-    el('standings-time').textContent=`快取資料，抓取於 ${new Date(cached.ts).toLocaleString('zh-TW')}`;
+async function loadStandings() {
+  const cached = getCache('f1_s26', 3600000);
+  if (cached) {
+    renderStandings(cached.data.d, cached.data.c);
+    el('standings-time').textContent = '快取資料，抓取於 ' + new Date(cached.ts).toLocaleString('zh-TW');
     return;
   }
-  try{
-    const[dRes,cRes]=await Promise.all([
+  try {
+    const results = await Promise.all([
       apiFetch('/driverStandings.json'),
       apiFetch('/constructorStandings.json')
     ]);
-    const d=dRes.MRData.StandingsTable.StandingsLists[0]?.DriverStandings||[];
-    const c=cRes.MRData.StandingsTable.StandingsLists[0]?.ConstructorStandings||[];
-    setCache('f1_s26',{d,c});
-    renderStandings(d,c);
-    el('standings-time').textContent=`更新時間：${new Date().toLocaleString('zh-TW')}`;
-  }catch(e){
-    el('err-standings').innerHTML=`<div class="error-box">積分載入失敗：${e.message} <a href="#" onclick="loadStandings();return false">重試</a></div>`;
-    el('tb-drivers').innerHTML='';
-    el('tb-constructors').innerHTML='';
+    const d = results[0].MRData.StandingsTable.StandingsLists[0]
+                ? results[0].MRData.StandingsTable.StandingsLists[0].DriverStandings : [];
+    const c = results[1].MRData.StandingsTable.StandingsLists[0]
+                ? results[1].MRData.StandingsTable.StandingsLists[0].ConstructorStandings : [];
+    setCache('f1_s26', { d: d, c: c });
+    renderStandings(d, c);
+    el('standings-time').textContent = '更新時間：' + new Date().toLocaleString('zh-TW');
+  } catch (e) {
+    el('err-standings').innerHTML = '<div class="error-box">積分載入失敗：' + e.message + ' <a href="#" onclick="loadStandings();return false">重試</a></div>';
+    el('tb-drivers').innerHTML = '';
+    el('tb-constructors').innerHTML = '';
   }
 }
-function renderStandings(dList,cList){
-  const maxD=parseFloat(dList[0]?.points||1);
-  el('tb-drivers').innerHTML=dList.map((d,i)=>{
-    const pts=parseFloat(d.points);
-    const col=COLORS[d.Constructors[0]?.constructorId]||'#888';
-    return`<tr>
-      <td class="dim">${d.position}</td>
-      <td><span class="dot" style="background:${col}"></span>${d.Driver.familyName}</td>
-      <td class="dim">${d.Constructors[0]?.name||''}</td>
-      <td style="text-align:right;font-weight:${i<3?500:400}">${d.points}</td>
-      <td style="text-align:right" class="dim">${d.wins}</td>
-      <td><div class="bar-wrap"><div class="bar" style="width:${Math.round(pts/maxD*100)}%;background:${col};opacity:.75"></div></div></td>
-    </tr>`;
+
+function renderStandings(dList, cList) {
+  const maxD = parseFloat(dList[0] ? dList[0].points : 1) || 1;
+  el('tb-drivers').innerHTML = dList.map(function(d, i) {
+    const pts = parseFloat(d.points);
+    const pct = Math.round(pts / maxD * 100);
+    const col = COLORS[d.Constructors[0] ? d.Constructors[0].constructorId : ''] || '#888';
+    return '<tr>'
+      + '<td class="dim">' + d.position + '</td>'
+      + '<td><span class="dot" style="background:' + col + '"></span>' + d.Driver.familyName + '</td>'
+      + '<td class="dim">' + (d.Constructors[0] ? d.Constructors[0].name : '') + '</td>'
+      + '<td style="text-align:right;font-weight:' + (i < 3 ? 500 : 400) + '">' + d.points + '</td>'
+      + '<td style="text-align:right" class="dim">' + d.wins + '</td>'
+      + '<td><div class="bar-wrap"><div class="bar" style="width:' + pct + '%;background:' + col + ';opacity:.75"></div></div></td>'
+      + '</tr>';
   }).join('');
 
-  const top=dList[0];
-  const gap=dList[1]?parseFloat(top?.points||0)-parseFloat(dList[1].points):0;
-  el('stat-grid').innerHTML=`
-    <div class="stat"><div class="stat-label">領跑車手</div><div class="stat-val">${top?.Driver?.familyName||'-'}</div><div class="stat-sub">${top?.points||0} 分</div></div>
-    <div class="stat"><div class="stat-label">領先差距</div><div class="stat-val">+${gap}</div><div class="stat-sub">vs ${dList[1]?.Driver?.familyName||'-'}</div></div>
-    <div class="stat"><div class="stat-label">領跑車隊</div><div class="stat-val" style="font-size:14px">${cList[0]?.Constructor?.name||'-'}</div><div class="stat-sub">${cList[0]?.points||0} 分</div></div>`;
+  const top = dList[0];
+  const gap = dList[1] ? parseFloat(top ? top.points : 0) - parseFloat(dList[1].points) : 0;
+  el('stat-grid').innerHTML =
+    '<div class="stat"><div class="stat-label">領跑車手</div><div class="stat-val">' + (top ? top.Driver.familyName : '-') + '</div><div class="stat-sub">' + (top ? top.points : 0) + ' 分</div></div>'
+    + '<div class="stat"><div class="stat-label">領先差距</div><div class="stat-val">+' + gap + '</div><div class="stat-sub">vs ' + (dList[1] ? dList[1].Driver.familyName : '-') + '</div></div>'
+    + '<div class="stat"><div class="stat-label">領跑車隊</div><div class="stat-val" style="font-size:14px">' + (cList[0] ? cList[0].Constructor.name : '-') + '</div><div class="stat-sub">' + (cList[0] ? cList[0].points : 0) + ' 分</div></div>';
 
-  const maxC=parseFloat(cList[0]?.points||1);
-  el('tb-constructors').innerHTML=cList.map((c,i)=>{
-    const col=COLORS[c.Constructor.constructorId]||'#888';
-    return`<tr>
-      <td class="dim">${c.position}</td>
-      <td><span class="dot" style="background:${col}"></span>${c.Constructor.name}</td>
-      <td style="text-align:right;font-weight:${i<3?500:400}">${c.points}</td>
-      <td><div class="bar-wrap"><div class="bar" style="width:${Math.round(parseFloat(c.points)/maxC*100)}%;background:${col};opacity:.75"></div></div></td>
-    </tr>`;
+  const maxC = parseFloat(cList[0] ? cList[0].points : 1) || 1;
+  el('tb-constructors').innerHTML = cList.map(function(c, i) {
+    const pts = parseFloat(c.points);
+    const pct = Math.round(pts / maxC * 100);
+    const col = COLORS[c.Constructor.constructorId] || '#888';
+    return '<tr>'
+      + '<td class="dim">' + c.position + '</td>'
+      + '<td><span class="dot" style="background:' + col + '"></span>' + c.Constructor.name + '</td>'
+      + '<td style="text-align:right;font-weight:' + (i < 3 ? 500 : 400) + '">' + c.points + '</td>'
+      + '<td><div class="bar-wrap"><div class="bar" style="width:' + pct + '%;background:' + col + ';opacity:.75"></div></div></td>'
+      + '</tr>';
   }).join('');
 }
 
 // ---- 賽程 ----
-async function loadCalendar(){
-  const cached=getCache('f1_c26',86400000);
-  if(cached){renderCalendar(cached.data);renderNext(cached.data);return;}
-  try{
-    const res=await apiFetch('.json');
-    const races=res.MRData.RaceTable.Races;
-    setCache('f1_c26',races);
+async function loadCalendar() {
+  const cached = getCache('f1_c26', 86400000);
+  if (cached) { renderCalendar(cached.data); renderNext(cached.data); return; }
+  try {
+    const res = await apiFetch('.json');
+    const races = res.MRData.RaceTable.Races;
+    setCache('f1_c26', races);
     renderCalendar(races);
     renderNext(races);
-  }catch(e){
-    const msg=`<div class="error-box">賽程載入失敗：${e.message}</div>`;
-    el('err-calendar').innerHTML=msg;
-    el('err-nextrace').innerHTML=msg;
-    el('tb-calendar').innerHTML='';
-    el('tb-nextrace').innerHTML='';
+  } catch (e) {
+    const msg = '<div class="error-box">賽程載入失敗：' + e.message + ' <a href="#" onclick="loadCalendar();return false">重試</a></div>';
+    el('err-calendar').innerHTML = msg;
+    el('err-nextrace').innerHTML = msg;
+    el('tb-calendar').innerHTML = '';
+    el('tb-nextrace').innerHTML = '';
   }
 }
-function renderCalendar(races){
-  const nextRound=races.find(r=>!isPast(r.date,r.time))?.round;
-  el('tb-calendar').innerHTML=races.map(r=>{
-    const isNext=r.round===nextRound;
-    const done=isPast(r.date,r.time);
-    const {n}=raceMeta(r.raceName);
-    const sprintTag=hasSprint(r)?`&nbsp;<span class="badge b-sprint">S</span>`:'';
-    const statusTag=done?`<span class="badge b-no">完賽</span>`:isNext?`<span class="badge b-ok">本週</span>`:'';
-    return`<tr${isNext?' style="background:var(--bg2)"':''}>
-      <td class="dim">${r.round}</td>
-      <td>${n}${sprintTag}</td>
-      <td class="dim">${fmtDate(r.date)}</td>
-      <td style="font-size:12px;${isNext?'font-weight:500':done?'color:var(--text2)':''}">${toTW(r.date,r.time)}</td>
-      <td>${statusTag}</td>
-    </tr>`;
+
+function renderCalendar(races) {
+  const nextRound = (races.find(function(r) { return !isPast(r.date, r.time); }) || {}).round;
+  el('tb-calendar').innerHTML = races.map(function(r) {
+    const isNext = r.round === nextRound;
+    const done = isPast(r.date, r.time);
+    const n = raceName(r.raceName);
+    const sprintTag = hasSprint(r) ? '&nbsp;<span class="badge b-sprint">S</span>' : '';
+    const statusTag = done ? '<span class="badge b-no">完賽</span>' : isNext ? '<span class="badge b-ok">本週</span>' : '';
+    return '<tr' + (isNext ? ' style="background:var(--bg2)"' : '') + '>'
+      + '<td class="dim">' + r.round + '</td>'
+      + '<td>' + n + sprintTag + '</td>'
+      + '<td class="dim">' + fmtDate(r.date) + '</td>'
+      + '<td style="font-size:12px;' + (isNext ? 'font-weight:500' : done ? 'color:var(--text2)' : '') + '">' + toTW(r.date, r.time) + '</td>'
+      + '<td>' + statusTag + '</td>'
+      + '</tr>';
   }).join('');
 }
-function renderNext(races){
-  const next=races.find(r=>!isPast(r.date,r.time));
-  if(!next){
-    el('next-header').innerHTML='<div style="color:var(--text2);font-size:13px;padding:10px 0">賽季已結束</div>';
-    el('tb-nextrace').innerHTML='';
+
+function renderNext(races) {
+  const next = races.find(function(r) { return !isPast(r.date, r.time); });
+  if (!next) {
+    el('next-header').innerHTML = '<div style="color:var(--text2);font-size:13px;padding:10px 0">賽季已結束</div>';
+    el('tb-nextrace').innerHTML = '';
     return;
   }
-  const sprint=hasSprint(next);
-  const {n:raceName}=raceMeta(next.raceName);
-  el('next-header').innerHTML=`
-    <div class="next-hd">
-      <h2>R${next.round} ${raceName}${sprint?' · 衝刺週':''</h2>
-      <p>${next.Circuit?.circuitName||''} · 正賽 ${toTW(next.date,next.time)}</p>
-    </div>`;
+  const sprint = hasSprint(next);
+  const n = raceName(next.raceName);
+  el('next-header').innerHTML =
+    '<div class="next-hd">'
+    + '<h2>R' + next.round + ' ' + n + (sprint ? ' · 衝刺週' : '') + '</h2>'
+    + '<p>' + (next.Circuit ? next.Circuit.circuitName : '') + ' · 正賽 ' + toTW(next.date, next.time) + '</p>'
+    + '</div>';
 
-  // 衝刺週不跑 FP2/FP3，一般週不跑 SQ/Sprint
-  const sessions=SESSION_ORDER
-    .filter(k=>{
-      if(k==='Race') return true;
-      if(!next[k]) return false;
-      if(sprint&&(k==='SecondPractice'||k==='ThirdPractice')) return false;
-      return true;
-    })
-    .map(k=>({key:k,...(k==='Race'?{date:next.date,time:next.time}:next[k])}));
+  const sessions = SESSION_ORDER.filter(function(k) {
+    if (k === 'Race') return true;
+    if (!next[k]) return false;
+    if (sprint && (k === 'SecondPractice' || k === 'ThirdPractice')) return false;
+    return true;
+  }).map(function(k) {
+    const s = k === 'Race' ? { date: next.date, time: next.time } : next[k];
+    return { key: k, date: s.date, time: s.time };
+  });
 
-  el('tb-nextrace').innerHTML=sessions.map(s=>{
-    const avail=AVAILABLE.has(s.key);
-    const past=isPast(s.date,s.time);
-    const dim=(!avail||past)?'opacity:.4':'';
-    return`<tr style="${dim}">
-      <td>${SESSION_LABEL[s.key]||s.key}</td>
-      <td style="font-size:12px;font-weight:${avail&&!past?500:400}">${toTW(s.date,s.time)}</td>
-      <td style="font-size:12px">${avail?'體育1台':'MAX台'}</td>
-      <td><span class="badge ${avail?'b-ok':'b-no'}">${avail?'✓ 可看':'✗ 無法'}</span></td>
-    </tr>`;
+  el('tb-nextrace').innerHTML = sessions.map(function(s) {
+    const avail = AVAILABLE.has(s.key);
+    const past = isPast(s.date, s.time);
+    const dim = (!avail || past) ? 'opacity:.4' : '';
+    return '<tr style="' + dim + '">'
+      + '<td>' + (SESSION_LABEL[s.key] || s.key) + '</td>'
+      + '<td style="font-size:12px;font-weight:' + (avail && !past ? 500 : 400) + '">' + toTW(s.date, s.time) + '</td>'
+      + '<td style="font-size:12px">' + (avail ? '體育1台' : 'MAX台') + '</td>'
+      + '<td><span class="badge ' + (avail ? 'b-ok' : 'b-no') + '">' + (avail ? '✓ 可看' : '✗ 無法') + '</span></td>'
+      + '</tr>';
   }).join('');
 }
 
 // ---- UI ----
-function showPanel(id,btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-  el('panel-'+id).classList.add('active');
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(b) { b.classList.remove('active'); });
+  el('panel-' + id).classList.add('active');
   btn.classList.add('active');
 }
-function refreshAll(){
-  ['f1_s26','f1_c26'].forEach(k=>localStorage.removeItem(k));
+
+function refreshAll() {
+  ['f1_s26', 'f1_c26'].forEach(function(k) { localStorage.removeItem(k); });
   loadStandings();
   loadCalendar();
 }
