@@ -55,6 +55,7 @@ tr:hover td{background:var(--bg2)}
 .b-sprint{background:var(--amber-bg);color:var(--amber-text)}
 /* .b-now and .b-done are aliases — use .b-ok and .b-no directly */
 .dim{color:var(--text2);font-size:12px}
+.ctry{display:inline-block;font-size:10px;font-weight:500;color:var(--text2);background:var(--bg3);border-radius:3px;padding:1px 4px;letter-spacing:.04em}
 .loading{color:var(--text2);font-size:13px;padding:18px;text-align:center}
 .error-box{color:var(--red-text);background:var(--red-bg);border-radius:var(--radius);padding:10px 14px;font-size:13px;margin-bottom:10px}
 .next-hd{background:var(--green-bg);border-radius:var(--radius);padding:10px 14px;margin-bottom:10px}
@@ -213,30 +214,30 @@ const COLORS={
 
 // ---- 合併 FLAGS + SHORT_NAME 成一張表 ----
 const RACE_META={
-  'Australian Grand Prix':   {f:'🇦🇺',n:'澳洲'},
-  'Chinese Grand Prix':      {f:'🇨🇳',n:'中國'},
-  'Japanese Grand Prix':     {f:'🇯🇵',n:'日本'},
-  'Bahrain Grand Prix':      {f:'🇧🇭',n:'巴林'},
-  'Saudi Arabian Grand Prix':{f:'🇸🇦',n:'沙烏地'},
-  'Miami Grand Prix':        {f:'🇺🇸',n:'邁阿密'},
-  'Canadian Grand Prix':     {f:'🇨🇦',n:'加拿大'},
-  'Monaco Grand Prix':       {f:'🇲🇨',n:'摩納哥'},
-  'Spanish Grand Prix':      {f:'🇪🇸',n:'西班牙'},
-  'Austrian Grand Prix':     {f:'🇦🇹',n:'奧地利'},
-  'British Grand Prix':      {f:'🇬🇧',n:'英國'},
-  'Belgian Grand Prix':      {f:'🇧🇪',n:'比利時'},
-  'Hungarian Grand Prix':    {f:'🇭🇺',n:'匈牙利'},
-  'Dutch Grand Prix':        {f:'🇳🇱',n:'荷蘭'},
-  'Italian Grand Prix':      {f:'🇮🇹',n:'義大利'},
-  'Azerbaijan Grand Prix':   {f:'🇦🇿',n:'亞塞拜然'},
-  'Singapore Grand Prix':    {f:'🇸🇬',n:'新加坡'},
-  'United States Grand Prix':{f:'🇺🇸',n:'美國'},
-  'Mexico City Grand Prix':  {f:'🇲🇽',n:'墨西哥'},
-  'São Paulo Grand Prix':    {f:'🇧🇷',n:'巴西'},
-  'Las Vegas Grand Prix':    {f:'🇺🇸',n:'拉斯維加斯'},
-  'Qatar Grand Prix':        {f:'🇶🇦',n:'卡達'},
-  'Abu Dhabi Grand Prix':    {f:'🇦🇪',n:'阿布達比'},
-  'Madrid Grand Prix':       {f:'🇪🇸',n:'馬德里'},
+  'Australian Grand Prix':   {c:'AU',n:'澳洲'},
+  'Chinese Grand Prix':      {c:'CN',n:'中國'},
+  'Japanese Grand Prix':     {c:'JP',n:'日本'},
+  'Bahrain Grand Prix':      {c:'BH',n:'巴林'},
+  'Saudi Arabian Grand Prix':{c:'SA',n:'沙烏地'},
+  'Miami Grand Prix':        {c:'US',n:'邁阿密'},
+  'Canadian Grand Prix':     {c:'CA',n:'加拿大'},
+  'Monaco Grand Prix':       {c:'MC',n:'摩納哥'},
+  'Spanish Grand Prix':      {c:'ES',n:'西班牙'},
+  'Austrian Grand Prix':     {c:'AT',n:'奧地利'},
+  'British Grand Prix':      {c:'GB',n:'英國'},
+  'Belgian Grand Prix':      {c:'BE',n:'比利時'},
+  'Hungarian Grand Prix':    {c:'HU',n:'匈牙利'},
+  'Dutch Grand Prix':        {c:'NL',n:'荷蘭'},
+  'Italian Grand Prix':      {c:'IT',n:'義大利'},
+  'Azerbaijan Grand Prix':   {c:'AZ',n:'亞塞拜然'},
+  'Singapore Grand Prix':    {c:'SG',n:'新加坡'},
+  'United States Grand Prix':{c:'US',n:'美國'},
+  'Mexico City Grand Prix':  {c:'MX',n:'墨西哥'},
+  'São Paulo Grand Prix':    {c:'BR',n:'巴西'},
+  'Las Vegas Grand Prix':    {c:'LV',n:'拉斯維加斯'},
+  'Qatar Grand Prix':        {c:'QA',n:'卡達'},
+  'Abu Dhabi Grand Prix':    {c:'AE',n:'阿布達比'},
+  'Madrid Grand Prix':       {c:'MD',n:'馬德里'},
 };
 
 const SESSION_LABEL={
@@ -268,7 +269,7 @@ function isPast(date,time){
   return new Date(time?date+'T'+time:date+'T23:59:59Z')<new Date();
 }
 function hasSprint(r){return!!(r.Sprint||r.SprintQualifying)}
-function raceMeta(name){return RACE_META[name]||{f:'🏁',n:name.replace(' Grand Prix','')}}
+function raceMeta(name){return RACE_META[name]||{c:'--',n:name.replace(' Grand Prix','')}}
 
 function getCache(k,maxMs){
   try{
@@ -369,12 +370,12 @@ function renderCalendar(races){
   el('tb-calendar').innerHTML=races.map(r=>{
     const isNext=r.round===nextRound;
     const done=isPast(r.date,r.time);
-    const {f,n}=raceMeta(r.raceName);
+    const {c,n}=raceMeta(r.raceName);
     const sprintTag=hasSprint(r)?`&nbsp;<span class="badge b-sprint">S</span>`:'';
     const statusTag=done?`<span class="badge b-no">完賽</span>`:isNext?`<span class="badge b-ok">本週</span>`:'';
     return`<tr${isNext?' style="background:var(--bg2)"':''}>
       <td class="dim">${r.round}</td>
-      <td>${f}</td>
+      <td><span class="ctry">${c}</span></td>
       <td>${n}${sprintTag}</td>
       <td class="dim">${fmtDate(r.date)}</td>
       <td style="font-size:12px;${isNext?'font-weight:500':done?'color:var(--text2)':''}">${toTW(r.date,r.time)}</td>
@@ -390,10 +391,10 @@ function renderNext(races){
     return;
   }
   const sprint=hasSprint(next);
-  const {f}=raceMeta(next.raceName);
+  const {c,n:raceName}=raceMeta(next.raceName);
   el('next-header').innerHTML=`
     <div class="next-hd">
-      <h2>${f} R${next.round} ${next.raceName}${sprint?' · 衝刺週':''}</h2>
+      <h2><span class="ctry">${c}</span> R${next.round} ${raceName}${sprint?' · 衝刺週':''</h2>
       <p>${next.Circuit?.circuitName||''} · 正賽 ${toTW(next.date,next.time)}</p>
     </div>`;
 
@@ -410,11 +411,11 @@ function renderNext(races){
   el('tb-nextrace').innerHTML=sessions.map(s=>{
     const avail=AVAILABLE.has(s.key);
     const past=isPast(s.date,s.time);
-    const muted=past?'color:var(--text2)':'';
-    return`<tr>
-      <td style="${muted}">${SESSION_LABEL[s.key]||s.key}</td>
-      <td style="font-size:12px;font-weight:${avail&&!past?500:400};${muted}">${toTW(s.date,s.time)}</td>
-      <td style="font-size:12px;${muted}">${avail?'體育1台':'MAX台'}</td>
+    const dim=(!avail||past)?'opacity:.4':'';
+    return`<tr style="${dim}">
+      <td>${SESSION_LABEL[s.key]||s.key}</td>
+      <td style="font-size:12px;font-weight:${avail&&!past?500:400}">${toTW(s.date,s.time)}</td>
+      <td style="font-size:12px">${avail?'體育1台':'MAX台'}</td>
       <td><span class="badge ${avail?'b-ok':'b-no'}">${avail?'✓ 可看':'✗ 無法'}</span></td>
     </tr>`;
   }).join('');
