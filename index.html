@@ -55,7 +55,6 @@ tr:hover td{background:var(--bg2)}
 .b-sprint{background:var(--amber-bg);color:var(--amber-text)}
 /* .b-now and .b-done are aliases — use .b-ok and .b-no directly */
 .dim{color:var(--text2);font-size:12px}
-.ctry{display:inline-block;font-size:10px;font-weight:500;color:var(--text2);background:var(--bg3);border-radius:3px;padding:1px 4px;letter-spacing:.04em}
 .loading{color:var(--text2);font-size:13px;padding:18px;text-align:center}
 .error-box{color:var(--red-text);background:var(--red-bg);border-radius:var(--radius);padding:10px 14px;font-size:13px;margin-bottom:10px}
 .next-hd{background:var(--green-bg);border-radius:var(--radius);padding:10px 14px;margin-bottom:10px}
@@ -135,7 +134,6 @@ a:hover{text-decoration:underline}
       <table>
         <thead><tr>
           <th style="width:32px">R</th>
-          <th style="width:20px"></th>
           <th>賽站</th>
           <th style="width:48px">日期</th>
           <th style="width:116px">正賽台灣時間</th>
@@ -370,12 +368,11 @@ function renderCalendar(races){
   el('tb-calendar').innerHTML=races.map(r=>{
     const isNext=r.round===nextRound;
     const done=isPast(r.date,r.time);
-    const {c,n}=raceMeta(r.raceName);
+    const {n}=raceMeta(r.raceName);
     const sprintTag=hasSprint(r)?`&nbsp;<span class="badge b-sprint">S</span>`:'';
     const statusTag=done?`<span class="badge b-no">完賽</span>`:isNext?`<span class="badge b-ok">本週</span>`:'';
     return`<tr${isNext?' style="background:var(--bg2)"':''}>
       <td class="dim">${r.round}</td>
-      <td><span class="ctry">${c}</span></td>
       <td>${n}${sprintTag}</td>
       <td class="dim">${fmtDate(r.date)}</td>
       <td style="font-size:12px;${isNext?'font-weight:500':done?'color:var(--text2)':''}">${toTW(r.date,r.time)}</td>
@@ -391,10 +388,10 @@ function renderNext(races){
     return;
   }
   const sprint=hasSprint(next);
-  const {c,n:raceName}=raceMeta(next.raceName);
+  const {n:raceName}=raceMeta(next.raceName);
   el('next-header').innerHTML=`
     <div class="next-hd">
-      <h2><span class="ctry">${c}</span> R${next.round} ${raceName}${sprint?' · 衝刺週':''</h2>
+      <h2>R${next.round} ${raceName}${sprint?' · 衝刺週':''</h2>
       <p>${next.Circuit?.circuitName||''} · 正賽 ${toTW(next.date,next.time)}</p>
     </div>`;
 
