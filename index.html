@@ -104,10 +104,9 @@ a:hover{text-decoration:underline}
           <th>車手</th>
           <th style="width:96px">車隊</th>
           <th style="width:44px;text-align:right">分</th>
-          <th style="width:34px;text-align:right">勝</th>
           <th></th>
         </tr></thead>
-        <tbody id="tb-drivers"><tr><td colspan="6" class="loading">載入中...</td></tr></tbody>
+        <tbody id="tb-drivers"><tr><td colspan="5" class="loading">載入中...</td></tr></tbody>
       </table>
     </div>
     <div class="section-label">車隊積分</div>
@@ -333,12 +332,13 @@ function renderStandings(dList, cList) {
     const pts = parseFloat(d.points);
     const pct = Math.round(pts / maxD * 100);
     const col = COLORS[d.Constructors[0] ? d.Constructors[0].constructorId : ''] || '#888';
+    var fullName = d.Driver.givenName + ' ' + d.Driver.familyName;
+    var winBadge = parseInt(d.wins) > 0 ? ' <span class="badge b-ok" style="font-size:10px;padding:1px 5px">' + d.wins + '勝</span>' : '';
     return '<tr>'
       + '<td class="dim">' + d.position + '</td>'
-      + '<td><span class="dot" style="background:' + col + '"></span>' + d.Driver.familyName + '</td>'
+      + '<td><span class="dot" style="background:' + col + '"></span>' + fullName + winBadge + '</td>'
       + '<td class="dim">' + (d.Constructors[0] ? d.Constructors[0].name : '') + '</td>'
       + '<td style="text-align:right;font-weight:' + (i < 3 ? 500 : 400) + '">' + d.points + '</td>'
-      + '<td style="text-align:right" class="dim">' + d.wins + '</td>'
       + '<td><div class="bar-wrap"><div class="bar" style="width:' + pct + '%;background:' + col + ';opacity:.75"></div></div></td>'
       + '</tr>';
   }).join('');
