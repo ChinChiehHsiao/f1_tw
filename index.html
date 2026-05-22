@@ -35,7 +35,7 @@ header h1{font-size:15px;font-weight:500}
 .tab:hover:not(.active){background:var(--bg2)}
 .content{padding:14px 18px}
 .panel{display:none}.panel.active{display:block}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
 .stat{background:var(--bg2);border-radius:var(--radius);padding:10px 12px}
 .stat-label,.stat-sub{font-size:11px;color:var(--text2)}
 .stat-val{font-size:18px;font-weight:500;margin-top:1px}
@@ -85,7 +85,7 @@ a:hover{text-decoration:underline}
 <div class="tabs">
   <button class="tab active" onclick="showPanel('standings',this)">積分榜</button>
   <button class="tab" onclick="showPanel('calendar',this)">賽程</button>
-  <button class="tab" onclick="showPanel('nextrace',this)">本站轉播</button>
+  <button class="tab" onclick="showPanel('nextrace',this)">愛爾達轉播</button>
   <button class="tab" onclick="showPanel('guide',this)">說明</button>
 </div>
 
@@ -102,7 +102,7 @@ a:hover{text-decoration:underline}
         <thead><tr>
           <th style="width:36px">#</th>
           <th>車手</th>
-          <th style="width:96px">車隊</th>
+          <th style="width:130px">車隊</th>
           <th style="width:44px;text-align:right">分</th>
           <th></th>
         </tr></thead>
@@ -187,7 +187,7 @@ a:hover{text-decoration:underline}
     <div class="section-label">部署說明</div>
     <div class="card card-body" style="line-height:2;color:var(--text2)">
       網址：<a href="https://chinchiehhsiao.github.io/f1_tw" target="_blank">chinchiehhsiao.github.io/f1_tw</a><br>
-      部署：GitHub Pages · 完全免費 · push 後自動更新
+      部署：GitHub Pages · 免費 · push 後自動更新
     </div>
   </div>
 
@@ -344,10 +344,8 @@ function renderStandings(dList, cList) {
   }).join('');
 
   const top = dList[0];
-  const gap = dList[1] ? parseFloat(top ? top.points : 0) - parseFloat(dList[1].points) : 0;
   el('stat-grid').innerHTML =
     '<div class="stat"><div class="stat-label">領跑車手</div><div class="stat-val" style="font-size:14px">' + (top ? top.Driver.givenName + ' ' + top.Driver.familyName : '-') + '</div><div class="stat-sub">' + (top ? top.points : 0) + ' 分</div></div>'
-    + '<div class="stat"><div class="stat-label">領先差距</div><div class="stat-val">+' + gap + '</div><div class="stat-sub">vs ' + (dList[1] ? dList[1].Driver.familyName : '-') + '</div></div>'
     + '<div class="stat"><div class="stat-label">領跑車隊</div><div class="stat-val" style="font-size:14px">' + (cList[0] ? cList[0].Constructor.name : '-') + '</div><div class="stat-sub">' + (cList[0] ? cList[0].points : 0) + ' 分</div></div>';
 
   const maxC = parseFloat(cList[0] ? cList[0].points : 1) || 1;
