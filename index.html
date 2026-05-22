@@ -38,7 +38,7 @@ header h1{font-size:15px;font-weight:500}
 .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
 .stat{background:var(--bg2);border-radius:var(--radius);padding:10px 12px}
 .stat-label,.stat-sub{font-size:11px;color:var(--text2)}
-.stat-val{font-size:18px;font-weight:500;margin-top:1px}
+.stat-val{font-size:22px;font-weight:500;margin-top:2px}
 .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:10px}
 .card-body{padding:12px 14px;font-size:13px}
 table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
@@ -76,8 +76,8 @@ a:hover{text-decoration:underline}
 
 <header>
   <div>
-    <h1>F1 台灣車迷報表 2026</h1>
-    <div class="sub">體育1-4台 · 無MAX台 · 資料自動從 Jolpica API 抓取</div>
+    <h1>Formula 1 2026 相關資訊</h1>
+    <div class="sub">體育1-4台 · 無MAX台</div>
   </div>
   <button class="btn" onclick="refreshAll()">重新整理</button>
 </header>
@@ -129,7 +129,7 @@ a:hover{text-decoration:underline}
     <div class="card">
       <table>
         <thead><tr>
-          <th style="width:32px">站</th>
+          <th style="width:32px">#</th>
           <th>賽站</th>
           <th style="width:48px">日期</th>
           <th style="width:116px">正賽台灣時間</th>
