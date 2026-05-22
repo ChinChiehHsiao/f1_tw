@@ -156,7 +156,7 @@ a:hover{text-decoration:underline}
         <tbody id="tb-nextrace"><tr><td colspan="4" class="loading">載入中...</td></tr></tbody>
       </table>
     </div>
-    <div class="note">FP 自由練習需要 MAX 台，其餘場次在體育1台播出（偶爾會換2/3/4台，以 ELTA 官網節目表為準）。</div>
+    <div class="note">頻道資訊由 HamiVideo 節目表自動抓取，每週更新。FP 自由練習僅 MAX 台，其餘場次依實際節目表顯示。</div>
   </div>
 
   <div class="panel" id="panel-guide">
@@ -187,13 +187,7 @@ a:hover{text-decoration:underline}
     <div class="section-label">部署說明</div>
     <div class="card card-body" style="line-height:2;color:var(--text2)">
       網址：<a href="https://chinchiehhsiao.github.io/f1_tw" target="_blank">chinchiehhsiao.github.io/f1_tw</a><br>
-      原始碼：<a href="https://github.com/ChinChiehHsiao/f1_tw" target="_blank">github.com/ChinChiehHsiao/f1_tw</a><br>
       部署：GitHub Pages · 免費 · push 後自動更新
-    </div>
-    <div class="section-label">聯絡</div>
-    <div class="card card-body" style="line-height:2;color:var(--text2)">
-      作者：Chin-Chieh Hsiao<br>
-      Email：<a href="mailto:jayabc321@gmail.com">jayabc321@gmail.com</a>
     </div>
   </div>
 
@@ -244,12 +238,41 @@ const SESSION_LABEL = {
   Race:            '正賽'
 };
 const SESSION_ORDER = ['FirstPractice','SecondPractice','ThirdPractice','SprintQualifying','Sprint','Qualifying','Race'];
-const AVAILABLE = new Set(['SprintQualifying','Sprint','Qualifying','Race']);
+let ELTA_CHANNELS = null; // 從 elta.json 載入
 const DAYS = ['日','一','二','三','四','五','六'];
 const BASE = 'https://api.jolpi.ca/ergast/f1/2026';
 
 // ---- 工具 ----
 function el(id) { return document.getElementById(id); }
+
+async function loadEltaChannels() {
+  try {
+    const r = await fetch('./elta.json?t=' + Date.now());
+    if (r.ok) {
+      const data = await r.json();
+      ELTA_CHANNELS = data.channels || null;
+      console.log('[ELTA] 頻道資料載入成功', data.updated || '');
+    } else {
+      console.warn('[ELTA] elta.json 回傳', r.status);
+      ELTA_CHANNELS = null;
+    }
+  } catch (e) {
+    console.warn('[ELTA] 無法載入 elta.json:', e.message);
+    ELTA_CHANNELS = null;
+  }
+}
+
+function getChannel(sessionKey) {
+  if (ELTA_CHANNELS && ELTA_CHANNELS[sessionKey]) {
+    return ELTA_CHANNELS[sessionKey];
+  }
+  return null;
+}
+
+function isAvailable(ch) {
+  if (!ch) return false;
+  return !ch.includes('MAX');
+}
 
 function raceName(name) {
   return RACE_META[name] || name.replace(' Grand Prix', '');
@@ -434,17 +457,33 @@ function renderNext(races) {
     return { key: k, date: s.date, time: s.time };
   });
 
+  const noData = !ELTA_CHANNELS;
   el('tb-nextrace').innerHTML = sessions.map(function(s) {
-    const avail = AVAILABLE.has(s.key);
+    const ch = getChannel(s.key);
+    const avail = isAvailable(ch);
     const past = isPast(s.date, s.time);
-    const dim = (!avail || past) ? 'opacity:.4' : '';
+    const dim = past ? 'opacity:.4' : '';
+    var chCell, badgeCell;
+    if (noData || !ch) {
+      chCell = '<span style="color:var(--text2);font-size:11px">待更新</span>';
+      badgeCell = '<span class="badge b-no" style="opacity:.5">?</span>';
+    } else if (avail) {
+      chCell = ch;
+      badgeCell = '<span class="badge b-ok">✓ 可看</span>';
+    } else {
+      chCell = ch;
+      badgeCell = '<span class="badge b-no">✗ 無法</span>';
+    }
     return '<tr style="' + dim + '">'
       + '<td>' + (SESSION_LABEL[s.key] || s.key) + '</td>'
-      + '<td style="font-size:12px;font-weight:' + (avail && !past ? 500 : 400) + '">' + toTW(s.date, s.time) + '</td>'
-      + '<td style="font-size:12px">' + (avail ? '體育1台' : 'MAX台') + '</td>'
-      + '<td><span class="badge ' + (avail ? 'b-ok' : 'b-no') + '">' + (avail ? '✓ 可看' : '✗ 無法') + '</span></td>'
+      + '<td style="font-size:12px;font-weight:' + (avail && !past && !noData ? 500 : 400) + '">' + toTW(s.date, s.time) + '</td>'
+      + '<td style="font-size:12px">' + chCell + '</td>'
+      + '<td>' + badgeCell + '</td>'
       + '</tr>';
   }).join('');
+  if (noData) {
+    el('tb-nextrace').innerHTML += '<tr><td colspan="4" style="font-size:11px;color:var(--text2);padding:8px;text-align:center">頻道資料尚未抓取，請稍後重新整理</td></tr>';
+  }
 }
 
 // ---- UI ----
@@ -461,8 +500,7 @@ function refreshAll() {
   loadCalendar();
 }
 
-loadStandings();
-loadCalendar();
+loadEltaChannels().then(() => { loadStandings(); loadCalendar(); });
 </script>
 </body>
 </html>

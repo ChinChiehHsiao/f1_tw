@@ -1,0 +1,14 @@
+{
+  "updated": "",
+  "source": "https://hamivideo.hinet.net/main/317.do",
+  "scraped": false,
+  "channels": {
+    "Race":             "體育1-4台",
+    "Qualifying":       "體育1-4台",
+    "Sprint":           "體育1-4台",
+    "SprintQualifying": "體育1-4台",
+    "FirstPractice":    "MAX台",
+    "SecondPractice":   "MAX台",
+    "ThirdPractice":    "MAX台"
+  }
+}
