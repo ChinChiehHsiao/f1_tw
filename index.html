@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F1 台灣報表 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f5f4f0;--bg3:#eae9e4;
+  --text:#1a1a18;--text2:#6b6a64;--text3:#9c9a92;
+  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.2);
+  --green:#1D9E75;--green-bg:#E1F5EE;--green-text:#085041;
+  --amber-bg:#FAEEDA;--amber-text:#633806;
+  --gray-bg:#F1EFE8;--gray-text:#5F5E5A;
+  --red-bg:#FCEBEB;--red-text:#791F1F;
+  --radius:8px;--radius-lg:12px;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1a1a18;--bg2:#242422;--bg3:#2c2c2a;
+    --text:#e8e6de;--text2:#9c9a92;--text3:#6b6a64;
+    --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
+    --green:#5DCAA5;--green-bg:#085041;--green-text:#9FE1CB;
+    --amber-bg:#633806;--amber-text:#FAC775;
+    --gray-bg:#2c2c2a;--gray-text:#9c9a92;
+    --red-bg:#791F1F;--red-text:#F7C1C1;
+  }
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;max-width:720px;margin:0 auto}
+header{border-bottom:0.5px solid var(--border);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+header h1{font-size:15px;font-weight:500}
+.sub{font-size:11px;color:var(--text2);margin-top:2px}
+.tabs{display:flex;gap:5px;padding:10px 18px;border-bottom:0.5px solid var(--border);overflow-x:auto}
+.tab{background:transparent;border:0.5px solid var(--border2);border-radius:var(--radius);padding:5px 12px;font-size:13px;color:var(--text2);cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .12s}
+.tab.active{background:var(--bg2);color:var(--text);font-weight:500}
+.tab:hover:not(.active){background:var(--bg2)}
+.content{padding:14px 18px}
+.panel{display:none}
+.panel.active{display:block}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.stat{background:var(--bg2);border-radius:var(--radius);padding:10px 12px}
+.stat-label{font-size:11px;color:var(--text2)}
+.stat-val{font-size:18px;font-weight:500;margin-top:1px}
+.stat-sub{font-size:11px;color:var(--text2)}
+.card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+th{font-size:11px;color:var(--text2);font-weight:500;text-align:left;padding:5px 8px;border-bottom:0.5px solid var(--border)}
+td{padding:6px 8px;border-bottom:0.5px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0}
+.bar-wrap{height:4px;background:var(--bg3);border-radius:2px}
+.bar{height:4px;border-radius:2px}
+.badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;font-weight:500;white-space:nowrap}
+.b-ok{background:var(--green-bg);color:var(--green-text)}
+.b-no{background:var(--gray-bg);color:var(--gray-text)}
+.b-sprint{background:var(--amber-bg);color:var(--amber-text)}
+.b-now{background:var(--green-bg);color:var(--green-text)}
+.b-done{background:var(--gray-bg);color:var(--gray-text)}
+.loading{color:var(--text2);font-size:13px;padding:18px;text-align:center}
+.error-box{color:var(--red-text);background:var(--red-bg);border-radius:var(--radius);padding:10px 14px;font-size:13px;margin-bottom:10px}
+.next-hd{background:var(--green-bg);border-radius:var(--radius);padding:10px 14px;margin-bottom:10px}
+.next-hd h2{font-size:13px;color:var(--green-text);font-weight:500}
+.next-hd p{font-size:11px;color:var(--green);margin-top:2px}
+.section-label{font-size:11px;font-weight:500;color:var(--text2);margin:12px 0 5px;text-transform:uppercase;letter-spacing:.04em}
+.note{font-size:11px;color:var(--text2);margin-top:6px;line-height:1.6}
+.btn{background:transparent;border:0.5px solid var(--border2);border-radius:var(--radius);padding:4px 10px;font-size:11px;color:var(--text2);cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--bg2)}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+@media(max-width:480px){
+  .stat-grid{grid-template-columns:1fr 1fr}
+  header{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>F1 台灣車迷報表 2026</h1>
+    <div class="sub">體育1-4台 · 無MAX台 · 資料即時從 Jolpica API 自動抓取</div>
+  </div>
+  <button class="btn" onclick="refreshAll()">重新整理</button>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPanel('standings',this)">積分榜</button>
+  <button class="tab" onclick="showPanel('calendar',this)">賽程</button>
+  <button class="tab" onclick="showPanel('nextrace',this)">本站轉播</button>
+  <button class="tab" onclick="showPanel('guide',this)">說明</button>
+</div>
+
+<div class="content">
+
+  <!-- 積分榜 -->
+  <div class="panel active" id="panel-standings">
+    <div id="err-standings"></div>
+    <div class="stat-grid" id="stat-grid">
+      <div class="stat"><div class="stat-label">載入中...</div></div>
+    </div>
+    <div class="section-label">車手積分</div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th style="width:26px">#</th>
+          <th>車手</th>
+          <th style="width:96px">車隊</th>
+          <th style="width:34px;text-align:right">分</th>
+          <th style="width:28px;text-align:right">勝</th>
+          <th></th>
+        </tr></thead>
+        <tbody id="tb-drivers"><tr><td colspan="6" class="loading">載入中...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="section-label">車隊積分</div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th style="width:26px">#</th>
+          <th>車隊</th>
+          <th style="width:34px;text-align:right">分</th>
+          <th></th>
+        </tr></thead>
+        <tbody id="tb-constructors"><tr><td colspan="4" class="loading">載入中...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="note" id="standings-time"></div>
+  </div>
+
+  <!-- 賽程 -->
+  <div class="panel" id="panel-calendar">
+    <div id="err-calendar"></div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th style="width:22px">R</th>
+          <th style="width:20px"></th>
+          <th>賽站</th>
+          <th style="width:48px">日期</th>
+          <th style="width:116px">正賽台灣時間</th>
+          <th style="width:48px"></th>
+        </tr></thead>
+        <tbody id="tb-calendar"><tr><td colspan="6" class="loading">載入中...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="note">* 台灣時間 = UTC+8 自動換算。未公布時間顯示「待公布」。S = 衝刺週。</div>
+  </div>
+
+  <!-- 本站轉播 -->
+  <div class="panel" id="panel-nextrace">
+    <div id="err-nextrace"></div>
+    <div id="next-header"></div>
+    <div class="section-label">場次轉播資訊</div>
+    <div class="card">
+      <table>
+        <thead><tr>
+          <th>場次</th>
+          <th style="width:118px">台灣時間</th>
+          <th style="width:62px">頻道</th>
+          <th style="width:52px">可看？</th>
+        </tr></thead>
+        <tbody id="tb-nextrace"><tr><td colspan="4" class="loading">載入中...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="note">FP 自由練習需要 MAX 台，其餘場次在體育1台播出（偶爾會換2/3/4台，以 ELTA 官網節目表為準）。</div>
+  </div>
+
+  <!-- 說明 -->
+  <div class="panel" id="panel-guide">
+    <div class="section-label">你可以看的（體育1-4台）</div>
+    <div class="card" style="padding:12px 14px">
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:13px">
+        <div><span class="badge b-ok">✓</span>&nbsp;正賽 Race</div>
+        <div><span class="badge b-ok">✓</span>&nbsp;排位賽 Qualifying</div>
+        <div><span class="badge b-ok">✓</span>&nbsp;衝刺賽 Sprint（衝刺週才有）</div>
+        <div><span class="badge b-ok">✓</span>&nbsp;衝刺排位賽 SQ（衝刺週才有）</div>
+      </div>
+    </div>
+    <div class="section-label">需要 MAX 台才能看（你沒有）</div>
+    <div class="card" style="padding:12px 14px">
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:13px">
+        <div><span class="badge b-no">✗</span>&nbsp;自由練習 FP1 / FP2 / FP3</div>
+        <div><span class="badge b-no">✗</span>&nbsp;F2、F3、F1學院、F1 Kids</div>
+        <div><span class="badge b-no">✗</span>&nbsp;原音無廣告版（MAX 獨家）</div>
+      </div>
+    </div>
+    <div class="section-label">資料來源</div>
+    <div class="card" style="padding:12px 14px;font-size:13px;line-height:2;color:var(--text2)">
+      積分 / 賽程：<a href="https://api.jolpi.ca/ergast/f1/" target="_blank">Jolpica F1 API</a>（免費，Ergast 繼承者）<br>
+      台灣時間：UTC 自動換算為 UTC+8<br>
+      頻道規則：<a href="https://eltaott.tv" target="_blank">ELTA.tv</a> 2026-2029 賽季官方公告<br>
+      快取策略：積分 1 小時 · 賽程 24 小時（存於 localStorage）
+    </div>
+    <div class="section-label">部署說明</div>
+    <div class="card" style="padding:12px 14px;font-size:13px;line-height:2;color:var(--text2)">
+      1. 把這個 index.html 上傳到 GitHub repo<br>
+      2. Settings → Pages → Deploy from branch → main → Save<br>
+      3. 網址：https://你的帳號.github.io/repo名稱<br>
+      4. 完全免費，資料全部自動更新，不需要手動維護
+    </div>
+  </div>
+
+</div>
+
+<script>
+const TEAM_COLORS={
+  mercedes:'#00B8D4',ferrari:'#E8002D',mclaren:'#FF8000',
+  red_bull:'#3671C6',haas:'#B6BABD',alpine:'#0093CC',
+  rb:'#6692FF',williams:'#64C4FF',audi:'#BBB500',
+  cadillac:'#CC4B00',aston_martin:'#229971'
+};
+const CONS_COLORS={
+  Mercedes:'#00B8D4',Ferrari:'#E8002D',McLaren:'#FF8000',
+  'Red Bull':'#3671C6',Haas:'#B6BABD',Alpine:'#0093CC',
+  'Racing Bulls':'#6692FF',Williams:'#64C4FF',Audi:'#BBB500',
+  Cadillac:'#CC4B00','Aston Martin':'#229971'
+};
+const FLAGS={
+  'Australian Grand Prix':'🇦🇺','Chinese Grand Prix':'🇨🇳',
+  'Japanese Grand Prix':'🇯🇵','Bahrain Grand Prix':'🇧🇭',
+  'Saudi Arabian Grand Prix':'🇸🇦','Miami Grand Prix':'🇺🇸',
+  'Canadian Grand Prix':'🇨🇦','Monaco Grand Prix':'🇲🇨',
+  'Spanish Grand Prix':'🇪🇸','Austrian Grand Prix':'🇦🇹',
+  'British Grand Prix':'🇬🇧','Belgian Grand Prix':'🇧🇪',
+  'Hungarian Grand Prix':'🇭🇺','Dutch Grand Prix':'🇳🇱',
+  'Italian Grand Prix':'🇮🇹','Azerbaijan Grand Prix':'🇦🇿',
+  'Singapore Grand Prix':'🇸🇬','United States Grand Prix':'🇺🇸',
+  'Mexico City Grand Prix':'🇲🇽','São Paulo Grand Prix':'🇧🇷',
+  'Las Vegas Grand Prix':'🇺🇸','Qatar Grand Prix':'🇶🇦',
+  'Abu Dhabi Grand Prix':'🇦🇪','Madrid Grand Prix':'🇪🇸'
+};
+const SHORT_NAME={
+  'Australian Grand Prix':'澳洲','Chinese Grand Prix':'中國',
+  'Japanese Grand Prix':'日本','Bahrain Grand Prix':'巴林',
+  'Saudi Arabian Grand Prix':'沙烏地','Miami Grand Prix':'邁阿密',
+  'Canadian Grand Prix':'加拿大','Monaco Grand Prix':'摩納哥',
+  'Spanish Grand Prix':'西班牙','Austrian Grand Prix':'奧地利',
+  'British Grand Prix':'英國','Belgian Grand Prix':'比利時',
+  'Hungarian Grand Prix':'匈牙利','Dutch Grand Prix':'荷蘭',
+  'Italian Grand Prix':'義大利','Azerbaijan Grand Prix':'亞塞拜然',
+  'Singapore Grand Prix':'新加坡','United States Grand Prix':'美國',
+  'Mexico City Grand Prix':'墨西哥','São Paulo Grand Prix':'巴西',
+  'Las Vegas Grand Prix':'拉斯維加斯','Qatar Grand Prix':'卡達',
+  'Abu Dhabi Grand Prix':'阿布達比','Madrid Grand Prix':'馬德里'
+};
+const SESSION_LABEL={
+  FirstPractice:'FP1 自由練習',SecondPractice:'FP2 自由練習',
+  ThirdPractice:'FP3 自由練習',SprintQualifying:'衝刺排位賽 SQ',
+  Sprint:'衝刺賽',Qualifying:'排位賽 Q',Race:'正賽'
+};
+const SESSION_ORDER=['FirstPractice','SecondPractice','ThirdPractice','SprintQualifying','Sprint','Qualifying','Race'];
+const AVAILABLE=['SprintQualifying','Sprint','Qualifying','Race'];
+const DAYS=['日','一','二','三','四','五','六'];
+const BASE='https://api.jolpi.ca/ergast/f1/2026';
+
+function tw(dateStr,timeStr){
+  if(!timeStr)return'待公布';
+  const u=new Date(dateStr+'T'+timeStr);
+  if(isNaN(u))return'待公布';
+  const t=new Date(u.getTime()+8*3600000);
+  const m=t.getUTCMonth()+1,d=t.getUTCDate();
+  const dy=DAYS[t.getUTCDay()];
+  const h=String(t.getUTCHours()).padStart(2,'0');
+  const mi=String(t.getUTCMinutes()).padStart(2,'0');
+  return`${m}/${d}(${dy}) ${h}:${mi}`;
+}
+function fmtDate(s){const d=new Date(s+'T00:00:00Z');return`${d.getUTCMonth()+1}/${d.getUTCDate()}`}
+function isPast(date,time){
+  const t=time?new Date(date+'T'+time):new Date(date+'T23:59:59Z');
+  return t<new Date();
+}
+function hasSprint(r){return!!(r.Sprint||r.SprintQualifying)}
+function getCache(k,maxMs){
+  try{const i=localStorage.getItem(k);if(!i)return null;const{data,ts}=JSON.parse(i);if(Date.now()-ts>maxMs)return null;return data;}catch{return null;}
+}
+function setCache(k,d){try{localStorage.setItem(k,JSON.stringify({data:d,ts:Date.now()}));}catch{}}
+async function api(path){
+  const r=await fetch(BASE+path);
+  if(!r.ok)throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+// ---- Standings ----
+async function loadStandings(){
+  const ck='f1_s26';
+  const c=getCache(ck,3600000);
+  if(c){renderStandings(c.d,c.c);return;}
+  try{
+    const[dRes,cRes]=await Promise.all([
+      api('/driverStandings.json'),
+      api('/constructorStandings.json')
+    ]);
+    const d=dRes.MRData.StandingsTable.StandingsLists[0]?.DriverStandings||[];
+    const c2=cRes.MRData.StandingsTable.StandingsLists[0]?.ConstructorStandings||[];
+    setCache(ck,{d,c:c2});
+    renderStandings(d,c2);
+    document.getElementById('standings-time').textContent=`更新時間：${new Date().toLocaleString('zh-TW')}`;
+  }catch(e){
+    document.getElementById('err-standings').innerHTML=`<div class="error-box">積分載入失敗：${e.message} <a href="#" onclick="loadStandings();return false">重試</a></div>`;
+    document.getElementById('tb-drivers').innerHTML='';
+    document.getElementById('tb-constructors').innerHTML='';
+  }
+}
+function renderStandings(dList,cList){
+  const maxD=parseFloat(dList[0]?.points||1);
+  document.getElementById('tb-drivers').innerHTML=dList.map((d,i)=>{
+    const pts=parseFloat(d.points);
+    const pct=Math.round(pts/maxD*100);
+    const cid=d.Constructors[0]?.constructorId||'';
+    const col=TEAM_COLORS[cid]||'#888';
+    return`<tr>
+      <td style="color:var(--text2);font-size:12px">${d.position}</td>
+      <td><span class="dot" style="background:${col}"></span>${d.Driver.familyName}</td>
+      <td style="color:var(--text2);font-size:12px">${d.Constructors[0]?.name||''}</td>
+      <td style="text-align:right;font-weight:${i<3?500:400}">${d.points}</td>
+      <td style="text-align:right;color:var(--text2)">${d.wins}</td>
+      <td><div class="bar-wrap"><div class="bar" style="width:${pct}%;background:${col};opacity:.75"></div></div></td>
+    </tr>`;
+  }).join('');
+
+  const top=dList[0],gap=dList[1]?parseFloat(top?.points||0)-parseFloat(dList[1].points):0;
+  document.getElementById('stat-grid').innerHTML=`
+    <div class="stat"><div class="stat-label">領跑車手</div><div class="stat-val">${top?.Driver?.familyName||'-'}</div><div class="stat-sub">${top?.points||0} 分</div></div>
+    <div class="stat"><div class="stat-label">領先差距</div><div class="stat-val">+${gap}</div><div class="stat-sub">vs ${dList[1]?.Driver?.familyName||'-'}</div></div>
+    <div class="stat"><div class="stat-label">領跑車隊</div><div class="stat-val" style="font-size:14px">${cList[0]?.Constructor?.name||'-'}</div><div class="stat-sub">${cList[0]?.points||0} 分</div></div>`;
+
+  const maxC=parseFloat(cList[0]?.points||1);
+  document.getElementById('tb-constructors').innerHTML=cList.map((c,i)=>{
+    const pts=parseFloat(c.points);
+    const pct=Math.round(pts/maxC*100);
+    const col=CONS_COLORS[c.Constructor.name]||'#888';
+    return`<tr>
+      <td style="color:var(--text2);font-size:12px">${c.position}</td>
+      <td><span class="dot" style="background:${col}"></span>${c.Constructor.name}</td>
+      <td style="text-align:right;font-weight:${i<3?500:400}">${c.points}</td>
+      <td><div class="bar-wrap"><div class="bar" style="width:${pct}%;background:${col};opacity:.75"></div></div></td>
+    </tr>`;
+  }).join('');
+}
+
+// ---- Calendar ----
+async function loadCalendar(){
+  const ck='f1_c26';
+  const c=getCache(ck,86400000);
+  if(c){renderCalendar(c);renderNext(c);return;}
+  try{
+    const res=await api('.json');
+    const races=res.MRData.RaceTable.Races;
+    setCache(ck,races);
+    renderCalendar(races);
+    renderNext(races);
+  }catch(e){
+    const msg=`<div class="error-box">賽程載入失敗：${e.message}</div>`;
+    document.getElementById('err-calendar').innerHTML=msg;
+    document.getElementById('err-nextrace').innerHTML=msg;
+    document.getElementById('tb-calendar').innerHTML='';
+    document.getElementById('tb-nextrace').innerHTML='';
+  }
+}
+function renderCalendar(races){
+  const nextRound=races.find(r=>!isPast(r.date,r.time))?.round;
+  document.getElementById('tb-calendar').innerHTML=races.map(r=>{
+    const isNext=r.round===nextRound;
+    const done=isPast(r.date,r.time);
+    const sprint=hasSprint(r);
+    const flag=FLAGS[r.raceName]||'🏁';
+    const name=SHORT_NAME[r.raceName]||r.raceName.replace(' Grand Prix','');
+    const badge=done?`<span class="badge b-done">完賽</span>`:isNext?`<span class="badge b-now">本週</span>`:'';
+    const sp=sprint?`&nbsp;<span class="badge b-sprint">S</span>`:'';
+    return`<tr style="${isNext?'background:var(--bg2)':''}">
+      <td style="color:var(--text2);font-size:12px">${r.round}</td>
+      <td>${flag}</td>
+      <td>${name}${sp}</td>
+      <td style="color:var(--text2);font-size:12px">${fmtDate(r.date)}</td>
+      <td style="font-size:12px;${isNext?'font-weight:500':done?'color:var(--text2)':''}">${tw(r.date,r.time)}</td>
+      <td>${badge}</td>
+    </tr>`;
+  }).join('');
+}
+function renderNext(races){
+  const next=races.find(r=>!isPast(r.date,r.time));
+  if(!next){
+    document.getElementById('next-header').innerHTML='<div style="color:var(--text2);font-size:13px;padding:10px 0">賽季已結束</div>';
+    document.getElementById('tb-nextrace').innerHTML='';
+    return;
+  }
+  const flag=FLAGS[next.raceName]||'🏁';
+  const sprint=hasSprint(next);
+  document.getElementById('next-header').innerHTML=`
+    <div class="next-hd">
+      <h2>${flag} R${next.round} ${next.raceName}${sprint?' · 衝刺週':''}</h2>
+      <p>${next.Circuit?.circuitName||''} · 正賽 ${tw(next.date,next.time)}</p>
+    </div>`;
+
+  const sessions=SESSION_ORDER
+    .filter(k=>{
+      if(k==='Race')return true;
+      if(!next[k])return false;
+      if(k==='ThirdPractice'&&sprint)return false;
+      if(k==='SecondPractice'&&sprint)return false;
+      return true;
+    })
+    .map(k=>({key:k,...(k==='Race'?{date:next.date,time:next.time}:next[k])}));
+
+  document.getElementById('tb-nextrace').innerHTML=sessions.map(s=>{
+    const avail=AVAILABLE.includes(s.key);
+    const past=isPast(s.date,s.time);
+    const twTime=tw(s.date,s.time);
+    return`<tr>
+      <td style="${past?'color:var(--text2)':''}">${SESSION_LABEL[s.key]||s.key}</td>
+      <td style="font-size:12px;font-weight:${avail&&!past?500:400};${past?'color:var(--text2)':''}">${twTime}</td>
+      <td style="font-size:12px;${past?'color:var(--text2)':''}">${avail?'體育1台':'MAX台'}</td>
+      <td><span class="badge ${avail?'b-ok':'b-no'}">${avail?'✓ 可看':'✗ 無法'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ---- UI ----
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function refreshAll(){
+  ['f1_s26','f1_c26'].forEach(k=>localStorage.removeItem(k));
+  loadStandings();
+  loadCalendar();
+}
+
+loadStandings();
+loadCalendar();
+</script>
+</body>
+</html>
