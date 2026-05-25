@@ -1,12 +1,12 @@
 {
-  "updated": "2026-05-22T09:52:17.318568+00:00",
+  "updated": "2026-05-25T08:26:16.651398+00:00",
   "source": "https://hamivideo.hinet.net/main/317.do",
   "scraped": true,
   "channels": {
-    "SprintQualifying": "愛爾達體育1台",
     "Sprint": "愛爾達體育1台",
     "Qualifying": "愛爾達體育1台",
-    "Race": "愛爾達體育1台",
+    "Race": "愛爾達體育3台",
+    "SprintQualifying": "體育1-4台",
     "FirstPractice": "MAX台",
     "SecondPractice": "MAX台",
     "ThirdPractice": "MAX台"
