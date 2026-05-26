@@ -26,57 +26,34 @@ HEADERS = {
     "Origin": "https://eltaott.tv",
 }
 
-# 頻道號碼 → 頻道名稱
-CHANNEL_MAP = {
-    101: "愛爾達體育1台",
-    102: "愛爾達體育2台",
-    103: "愛爾達體育3台",
-    104: "愛爾達體育4台",
-    105: "愛爾達體育5台",
-}
-MAX_CHANNEL_RANGE = range(540, 560)  # 540-559 都是 MAX 台
+# ch101-199 = 一般台（體育1-99台），ch540+ = MAX 台
+def channel_name(num):
+    if 101 <= num <= 199:
+        return f"愛爾達體育{num - 100}台"
+    if 540 <= num <= 599:
+        return f"愛爾達體育MAX{num - 539}台"
+    return f"ch{num}"
 
-# program_desc 關鍵字 → session key
+def is_max(num):
+    return num >= 540
+
+# program_desc 關鍵字 → session key（順序重要，衝刺排位賽要在衝刺賽前）
 SESSION_KEYWORDS = [
     ("衝刺排位賽", "SprintQualifying"),
     ("衝刺賽",     "Sprint"),
     ("排位賽",     "Qualifying"),
-    ("自由練習",   "FP"),   # 先抓到再細分節次
     ("正賽",       "Race"),
+    ("第1節自由練習", "FirstPractice"),
+    ("第2節自由練習", "SecondPractice"),
+    ("第3節自由練習", "ThirdPractice"),
+    ("自由練習",   "FirstPractice"),  # 未標節次時預設第1節
 ]
 
-# 自由練習節次
-FP_MAP = {
-    "第1節": "FirstPractice",
-    "第2節": "SecondPractice",
-    "第3節": "ThirdPractice",
-}
-
-
-def channel_name(num):
-    if num in CHANNEL_MAP:
-        return CHANNEL_MAP[num]
-    if num in MAX_CHANNEL_RANGE:
-        return f"愛爾達體育MAX台(ch{num})"
-    return f"ch{num}"
-
-
-def is_max(num):
-    return num in MAX_CHANNEL_RANGE
-
-
 def detect_session(desc):
-    """從 program_desc 判斷 session key"""
     for kw, key in SESSION_KEYWORDS:
         if kw in desc:
-            if key == "FP":
-                for fp_kw, fp_key in FP_MAP.items():
-                    if fp_kw in desc:
-                        return fp_key
-                return "FirstPractice"  # 預設第1節
             return key
     return None
-
 
 def fetch_json():
     req = Request(API_URL, headers=HEADERS)
@@ -93,15 +70,16 @@ def fetch_json():
         print(f"[ERROR] JSON 解析失敗: {e}", file=sys.stderr)
         return None
 
-
 def parse_f1_channels(data):
     """
-    遍歷 calendar 裡所有日期，找出 F1 LIVE 場次。
-    只取中文主播版（排除含「英文解說」或「原音」的場次）。
-    同一個 session key 若有多個場次（不同頻道），優先取非 MAX 台。
+    過濾條件：
+    - game_type == "F1"
+    - 含 LIVE，不含 D-LIVE
+    - 不含「原音」（無主播純英文版，英文解說無廣告版仍保留）
+    同一 session 有多個頻道時，優先選非 MAX 台，再選頻道號碼最小的
     """
     calendar = data.get("calendar", {})
-    candidates = {}  # session_key -> list of {channel_number, channel_name, desc, start_time}
+    candidates = {}
 
     for date_str, programs in calendar.items():
         for p in programs:
@@ -110,8 +88,7 @@ def parse_f1_channels(data):
             desc = p.get("program_desc", "")
             if "LIVE" not in desc or "D-LIVE" in desc:
                 continue
-            # 跳過英文原音版
-            if "英文解說" in desc or "原音" in desc:
+            if "原音" in desc:   # 只過濾純英文無主播版
                 continue
 
             session = detect_session(desc)
@@ -121,28 +98,31 @@ def parse_f1_channels(data):
             ch_num = p.get("channel_number", 0)
             entry = {
                 "channel_number": ch_num,
-                "channel_name": channel_name(ch_num),
-                "is_max": is_max(ch_num),
-                "desc": desc,
-                "start_time": p.get("start_time", 0),
+                "channel_name":   channel_name(ch_num),
+                "is_max":         is_max(ch_num),
+                "desc":           desc,
+                "start_time":     p.get("start_time", 0),
             }
+            candidates.setdefault(session, []).append(entry)
+            print(f"  候選 {session:20s}  ch{ch_num:3d}  {desc[:55]}")
 
-            if session not in candidates:
-                candidates[session] = []
-            candidates[session].append(entry)
-            print(f"  找到 {session:20s} ch{ch_num:3d} {desc[:50]}")
-
-    # 每個 session 選最佳頻道：優先非 MAX、再依 start_time 最早
+    # 每個 session 選最佳：
+    # 1. 優先選未來的場次（start_time > now）
+    # 2. 若全部都已過去，選最近的過去場次
+    # 3. 非MAX台優先
+    # 4. 頻道號碼最小優先
+    now_ts = int(datetime.now(timezone.utc).timestamp())
     channels = {}
     for session, entries in candidates.items():
-        non_max = [e for e in entries if not e["is_max"]]
-        pool = non_max if non_max else entries
-        best = sorted(pool, key=lambda e: e["start_time"])[0]
+        future = [e for e in entries if e["start_time"] >= now_ts]
+        pool = future if future else entries
+        non_max = [e for e in pool if not e["is_max"]]
+        best_pool = non_max if non_max else pool
+        best = sorted(best_pool, key=lambda e: (e["start_time"], e["channel_number"]))[0]
         channels[session] = best["channel_name"]
-        print(f"  選定 {session:20s} → {best['channel_name']} ({best['desc'][:40]})")
+        print(f"  選定 {session:20s} → {best['channel_name']}  ({best['desc'][:40]})")
 
     return channels
-
 
 def main():
     print(f"[INFO] 抓取 {API_URL}")
@@ -161,7 +141,7 @@ def main():
 
     result = {
         "updated": datetime.now(timezone.utc).isoformat(),
-        "source": API_URL,
+        "source":  API_URL,
         "scraped": True,
         "channels": channels,
     }
@@ -169,10 +149,9 @@ def main():
     with open(OUTPUT, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 
-    print(f"\n[INFO] 寫入 {OUTPUT}")
+    print(f"\n[INFO] 寫入 {OUTPUT} 完成")
     for k, v in channels.items():
         print(f"  {k:20s} → {v}")
-
 
 if __name__ == "__main__":
     main()
