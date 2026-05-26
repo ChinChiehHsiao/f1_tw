@@ -456,7 +456,7 @@ function renderCalendar(races) {
     const done = isPast(r.date, r.time);
     const n = raceName(r.raceName);
     const sprintTag = hasSprint(r) ? '&nbsp;<span class="badge b-sprint">S</span>' : '';
-    const statusTag = done ? '<span class="badge b-no">完賽</span>' : isNext ? '<span class="badge b-ok">本週</span>' : '';
+    const statusTag = done ? '<span class="badge b-no">完賽</span>' : isNext ? '<span class="badge b-ok">本站</span>' : '';
     return '<tr' + (isNext ? ' style="background:var(--bg2)"' : '') + '>'
       + '<td class="dim">' + r.round + '</td>'
       + '<td>' + n + sprintTag + '</td>'
