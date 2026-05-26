@@ -4,7 +4,7 @@
 API: https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json
 """
 
-import json, sys, gzip, ssl
+import json, sys, gzip, ssl, re
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.error import URLError
@@ -56,6 +56,10 @@ def is_original_audio(desc):
 def is_kids(desc):
     return "Kids" in desc or "兒童" in desc
 
+def detect_event(desc):
+    match = re.search(r"([\u4e00-\u9fffA-Za-z]+站)", desc)
+    return match.group(1) if match else None
+
 # program_desc 關鍵字 → session key（順序重要，衝刺排位賽要在衝刺賽前）
 SESSION_KEYWORDS = [
     ("衝刺排位賽", "SprintQualifying"),
@@ -106,10 +110,11 @@ def parse_f1_channels(data):
     過濾條件：
     - game_type == "F1"
     - 含 LIVE，不含 D-LIVE
+    - 先選離執行當下最近的未來 F1 站別，再只輸出該站場次
     同一 session 有多個頻道時，優先選非 MAX 台、非原音、非 Kids，再選最早開播
     """
     calendar = data.get("calendar", {})
-    candidates = {}
+    all_entries = []
 
     for date_str, programs in calendar.items():
         for p in programs:
@@ -123,31 +128,50 @@ def parse_f1_channels(data):
             if not session:
                 continue
 
+            event = detect_event(desc)
+            if not event:
+                print(f"  略過：無法判斷站別  {desc[:55]}")
+                continue
+
             ch_num = p.get("channel_number", 0)
             entry = {
                 "channel_number": ch_num,
                 "channel_name":   channel_name(ch_num),
                 "is_max":         is_max(ch_num),
+                "event":          event,
                 "desc":           desc,
                 "start_time":     p.get("start_time", 0),
                 "is_original":    is_original_audio(desc),
                 "is_kids":        is_kids(desc),
             }
-            candidates.setdefault(session, []).append(entry)
-            print(f"  候選 {session:20s}  ch{ch_num:3d}  {desc[:55]}")
+            all_entries.append((session, entry))
+            print(f"  候選 {session:20s}  {event:8s}  ch{ch_num:3d}  {desc[:55]}")
+
+    now_ts = int(datetime.now(timezone.utc).timestamp())
+    future_entries = [(s, e) for s, e in all_entries if e["start_time"] >= now_ts]
+    if future_entries:
+        target_session, target_entry = sorted(future_entries, key=lambda item: item[1]["start_time"])[0]
+    elif all_entries:
+        target_session, target_entry = sorted(all_entries, key=lambda item: item[1]["start_time"], reverse=True)[0]
+    else:
+        return {}
+
+    target_event = target_entry["event"]
+    target_entries = [(s, e) for s, e in all_entries if e["event"] == target_event]
+    print(f"  目標站別：{target_event}（最近未來場次：{target_session}）")
+
+    candidates = {}
+    for session, entry in target_entries:
+        candidates.setdefault(session, []).append(entry)
 
     # 每個 session 選最佳：
-    # 1. 優先選未來的場次（start_time > now）
-    # 2. 若全部都已過去，選最近的過去場次
-    # 3. 非 MAX 台優先
-    # 4. 非原音、非 Kids 優先
-    # 5. 最早開播、頻道號碼最小優先
-    now_ts = int(datetime.now(timezone.utc).timestamp())
+    # 1. 只從目標站別挑選
+    # 2. 非 MAX 台優先
+    # 3. 非原音、非 Kids 優先
+    # 4. 最早開播、頻道號碼最小優先
     sessions = {}
     for session, entries in candidates.items():
-        future = [e for e in entries if e["start_time"] >= now_ts]
-        pool = future if future else entries
-        best = sorted(pool, key=lambda e: (
+        best = sorted(entries, key=lambda e: (
             e["is_max"],
             e["is_original"],
             e["is_kids"],
