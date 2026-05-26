@@ -484,7 +484,7 @@ function renderCalendar(races) {
     const statusTag = done ? '<span class="badge b-no">完賽</span>' : isNext ? '<span class="badge b-ok">本站</span>' : '';
     return '<tr' + (isNext ? ' style="background:var(--bg2)"' : '') + '>'
       + '<td class="dim">' + r.round + '</td>'
-      + '<td>' + n + sprintTag + '</td>'
+      + '<td style="' + (done ? 'color:var(--text2)' : '') + '">' + n + sprintTag + '</td>'
       + '<td class="dim">' + fmtDate(r.date) + '</td>'
       + '<td style="font-size:12px;' + (isNext ? 'font-weight:500' : done ? 'color:var(--text2)' : '') + '">' + toTW(r.date, r.time) + '</td>'
       + '<td>' + statusTag + '</td>'
