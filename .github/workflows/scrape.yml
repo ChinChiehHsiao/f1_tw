@@ -2,10 +2,8 @@ name: 自動抓取愛爾達轉播頻道
 
 on:
   schedule:
-    # 每週四 16:00 UTC = 台灣週五 00:00（賽前更新）
-    - cron: '0 16 * * 4'
-    # 每週一 04:00 UTC = 台灣週一 12:00（賽後確認）
-    - cron: '0 4 * * 1'
+    # 每天 16:00 UTC = 台灣時間隔天 00:00
+    - cron: '0 16 * * *'
   workflow_dispatch:  # 允許手動觸發
 
 permissions:
