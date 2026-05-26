@@ -1,85 +1,88 @@
 # F1 台灣車迷報表 2026
 
-🌐 **網址：https://chinchiehhsiao.github.io/f1_tw**
+網址：https://chinchiehhsiao.github.io/f1_tw
 
-完全自動更新的 F1 報表，針對愛爾達體育 1-4 台（無 MAX 台）的台灣車迷。
+這是一個給台灣 F1 車迷方便查詢的網頁，適用於 HamiVideo 電視運動館方案用戶，整理 2026 賽季的積分、賽程，以及 HamiVideo 愛爾達轉播資訊。專案部署在 GitHub Pages，不需要後端伺服器。
 
 ## 架構
 
 ```mermaid
 flowchart LR
-    A["Jolpica F1 API\n積分 · 賽程 · 場次時間"] -->|fetch| B["index.html\n積分榜 · 賽程 · 轉播"]
-    B -->|push| C["GitHub Pages\ngithub.io/f1_tw"]
-    C -->|開啟網頁| D["使用者"]
-    D -.->|"瀏覽器直打 API（無後端）"| A
-```
+    subgraph Pages["GitHub Pages 靜態網站"]
+        I["index.html"]
+        E
+    end
 
-瀏覽器直接呼叫 Jolpica API，無後端、無伺服器、無手動維護。
+    A["GitHub Action\n每天台灣時間 00:00"] --> S["scrape_elta.py"]
+    H["愛爾達運動節目表\nHamiVideo"] --> S
+    S --> E["elta.json"]
+
+    Pages --> U["使用者瀏覽器"]
+    U --> J["Jolpica F1 API\n積分 · 賽程 · session 時間"]
+```
 
 ## 功能
 
-- **積分榜** — 車手 + 車隊，自動從 Jolpica F1 API 抓取，快取 1 小時
-- **賽程表** — 全年 22 站，台灣時間自動換算（UTC+8），快取 24 小時
-- **愛爾達轉播** — 自動判斷下一站各場次時間、頻道、能不能看
-- **全自動** — 不需要任何手動更新
-
-## 自動化原理
-
-這個報表完全不需要後端伺服器或手動維護，靠以下機制自動運作：
-
-### 積分榜 & 賽程
-每次開啟網頁時，瀏覽器直接呼叫 [Jolpica F1 API](https://api.jolpi.ca/ergast/f1/)（免費、無需 API key）：
-- `GET /ergast/f1/2026/driverStandings.json` — 車手積分
-- `GET /ergast/f1/2026/constructorStandings.json` — 車隊積分
-- `GET /ergast/f1/2026.json` — 全年賽程與各場次 UTC 時間
-
-Jolpica 在每場賽事結束後約 1-2 小時自動更新，不需要任何人工操作。
-
-### 台灣時間換算
-API 回傳的時間都是 UTC，網頁前端直接加 8 小時換算成台灣時間（UTC+8），不依賴任何外部服務。
-
-### 轉播頻道判斷
-根據愛爾達 2026-2029 賽季官方公告的固定規則自動判斷：
-- **體育 1 台**：正賽、排位賽、衝刺賽、衝刺排位賽
-- **MAX 台**：自由練習 FP1/FP2/FP3、F2、F3 等
-
-不需要爬蟲，頻道規則整季固定，寫死在前端邏輯裡。
-
-### 快取機制
-為了減少 API 請求，資料存在瀏覽器的 localStorage：
-- 積分：快取 1 小時
-- 賽程：快取 24 小時
-- 按「重新整理」按鈕可強制清除快取重抓
-
-### 部署
-GitHub Pages 直接 host 靜態 HTML，push 後自動部署，完全免費，沒有伺服器成本。
-
-## 部署到 GitHub Pages（5 分鐘）
-
-1. 在 GitHub 建立一個新 repo（例如 `f1_tw`）
-2. 把 `index.html` 上傳到 repo 根目錄
-3. 到 repo 的 **Settings → Pages**
-4. Source 選 **Deploy from a branch**
-5. Branch 選 `main`，資料夾選 `/ (root)`，按 Save
-6. 等約 1 分鐘，網址 `https://你的帳號.github.io/f1_tw` 就上線了
+- **積分榜**：顯示車手積分與車隊積分
+- **賽程表**：顯示全年賽程，並換算成台灣時間
+- **HamiVideo 愛爾達轉播**：顯示下一站各場次的開播時間、頻道與是否可看
+- **問題回報**：可透過 GitHub Issues 回報錯誤或建議
 
 ## 資料來源
 
-| 資料 | 來源 | 更新頻率 |
-|------|------|---------|
-| 車手 / 車隊積分 | Jolpica F1 API | 頁面載入（快取 1 小時）|
-| 賽程 / 場次時間 | Jolpica F1 API | 頁面載入（快取 24 小時）|
-| 台灣時間換算 | UTC+8 自動計算 | 即時 |
-| ELTA 頻道 | 規則判斷（Q/Race/Sprint = 體育1台，FP = MAX台）| 靜態規則 |
+| 資料 | 來源 | 更新方式 |
+|------|------|----------|
+| 車手 / 車隊積分 | [Jolpica F1 API](https://api.jolpi.ca/ergast/f1/) | 瀏覽器抓取，快取 1 小時 |
+| 賽程 / 場次時間 | [Jolpica F1 API](https://api.jolpi.ca/ergast/f1/) | 瀏覽器抓取，快取 24 小時 |
+| 轉播資訊 | [愛爾達運動節目表](https://eltaott.tv/channel/sports_program_detail#F1) | GitHub Action 每天台灣時間 00:00 抓取 |
 
-## 注意事項
 
-- Jolpica API 是免費的，不需要 API key
-- 快取存在 localStorage，關瀏覽器後保留
-- 按「重新整理」強制清除快取重抓
-- 如果 Jolpica API 有時間差，賽後幾小時才會更新積分
+## 運作方式
 
-## 聯絡
+### 積分與賽程
 
-作者：Chin-Chieh Hsiao  
-Email：jayabc321@gmail.com
+網頁開啟時，瀏覽器會直接呼叫 Jolpica F1 API：
+
+- `GET /ergast/f1/2026/driverStandings.json`
+- `GET /ergast/f1/2026/constructorStandings.json`
+- `GET /ergast/f1/2026.json`
+
+為了減少請求，資料會存在瀏覽器的 `localStorage`：
+
+- 積分：快取 1 小時
+- 賽程：快取 24 小時
+
+右上角「重抓 Jolpica 積分、賽程」按鈕可以清除這些快取並重新抓資料。
+
+### 愛爾達轉播
+
+`.github/workflows/scrape.yml` 會每天台灣時間 00:00 執行 `scrape_elta.py`。
+
+流程：
+
+1. 從愛爾達運動節目表抓取 F1 節目資料
+2. 選出離抓取當下最近的未來 F1 站別
+3. 從同一站內挑選 FP、排位、正賽、衝刺場次
+4. 產生 `elta.json`
+5. 若資料有變更，GitHub Action 會自動 commit 並 push
+6. GitHub Pages 重新部署後，網頁會讀取最新的 `elta.json`
+
+轉播頁會優先顯示 HamiVideo 的開播時間；如果沒有抓到轉播資料，才會顯示 Jolpica 的 session 時間並加註。
+
+## 專案檔案
+
+- `index.html`：主要網頁
+- `scrape_elta.py`：抓取愛爾達轉播資訊並輸出 `elta.json`
+- `elta.json`：轉播資訊快取資料
+- `.github/workflows/scrape.yml`：每天自動更新轉播資訊的 GitHub Action
+
+## 部署
+
+本專案使用 GitHub Pages 部署。只要 push 到 `main` branch，GitHub Pages 會自動更新網站。
+
+## 聯絡與回報
+
+作者：Chin Chieh Hsiao  
+Email：jayabc321@gmail.com  
+GitHub repo：https://github.com/ChinChiehHsiao/f1_tw  
+問題回報：https://github.com/ChinChiehHsiao/f1_tw/issues
