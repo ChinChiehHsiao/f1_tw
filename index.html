@@ -81,7 +81,10 @@ a:hover{text-decoration:underline}
 <header>
   <div>
     <h1>Formula 1 2026 相關資訊</h1>
-    <div class="sub" id="data-status">快取資料，抓取中...</div>
+    <div class="sub">
+      <div id="elta-status">HamiVideo 轉播資料：抓取中...</div>
+      <div id="jolpica-status">Jolpica 積分資料：抓取中...</div>
+    </div>
   </div>
   <button class="btn" onclick="refreshAll()">重抓 Jolpica 積分、賽程</button>
 </header>
@@ -160,7 +163,7 @@ a:hover{text-decoration:underline}
         <tbody id="tb-nextrace"><tr><td colspan="4" class="loading">載入中...</td></tr></tbody>
       </table>
     </div>
-    <div class="note">轉播資料來源為 <a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">HamiVideo 愛爾達運動節目表</a>。GitHub Action 每天台灣時間 00:00 抓取，先選離抓取當下最近的未來 F1 站別，再顯示該站各場次；時間為 HamiVideo 開播時間，無資料時才顯示 Jolpica session 時間。</div>
+    <div class="note">轉播資料來源為 <a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">HamiVideo 愛爾達運動節目表</a>，適用於 HamiVideo 電視運動館方案。GitHub Action 每天台灣時間 00:00 抓取，先選離抓取當下最近的未來 F1 站別，再顯示該站各場次；時間為 HamiVideo 開播時間，無資料時才顯示 Jolpica session 時間。</div>
   </div>
 
   <div class="panel" id="panel-guide">
@@ -184,7 +187,7 @@ a:hover{text-decoration:underline}
     <div class="section-label">資料來源與更新</div>
     <div class="card card-body" style="line-height:2;color:var(--text2)">
       積分 / 賽程：<a href="https://api.jolpi.ca/ergast/f1/" target="_blank">Jolpica F1 API</a>，瀏覽器直接抓取；積分快取 1 小時，賽程快取 24 小時<br>
-      轉播資訊：<a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">HamiVideo 愛爾達運動節目表</a>，由 GitHub Action 每天台灣時間 00:00 抓取並更新 elta.json<br>
+      轉播資訊：<a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">HamiVideo 愛爾達運動節目表</a>，適用於 HamiVideo 電視運動館方案；由 GitHub Action 每天台灣時間 00:00 抓取並更新 elta.json<br>
       轉播邏輯：先選離抓取當下最近的未來 F1 站別，再從同一站內挑選 FP / 排位 / 正賽 / 衝刺場次；同場次優先顯示非 MAX、非原音、非 Kids 的頻道<br>
       時間顯示：轉播頁優先顯示 HamiVideo 開播時間；沒有轉播資料時，才顯示 Jolpica session 時間並加註
     </div>
@@ -273,19 +276,19 @@ async function loadEltaChannels() {
       ELTA_CHANNELS = data.channels || null;
       ELTA_SESSIONS = data.sessions || null;
       const updatedText = formatLocalDateTime(data.updated);
-      el('data-status').textContent = updatedText ? '快取資料，抓取於 ' + updatedText : '快取資料，抓取時間未提供';
+      el('elta-status').textContent = updatedText ? 'HamiVideo 轉播資料：抓取於 ' + updatedText : 'HamiVideo 轉播資料：抓取時間未提供';
       console.log('[ELTA] 頻道資料載入成功', data.updated || '');
     } else {
       console.warn('[ELTA] elta.json 回傳', r.status);
       ELTA_CHANNELS = null;
       ELTA_SESSIONS = null;
-      el('data-status').textContent = '快取資料，抓取失敗';
+      el('elta-status').textContent = 'HamiVideo 轉播資料：抓取失敗';
     }
   } catch (e) {
     console.warn('[ELTA] 無法載入 elta.json:', e.message);
     ELTA_CHANNELS = null;
     ELTA_SESSIONS = null;
-    el('data-status').textContent = '快取資料，抓取失敗';
+    el('elta-status').textContent = 'HamiVideo 轉播資料：抓取失敗';
   }
 }
 
@@ -387,7 +390,9 @@ async function loadStandings() {
   const cached = getCache('f1_s26', 3600000);
   if (cached) {
     renderStandings(cached.data.d, cached.data.c);
-    el('standings-time').textContent = '快取資料，抓取於 ' + new Date(cached.ts).toLocaleString('zh-TW');
+    const cachedText = formatLocalDateTime(cached.ts);
+    el('jolpica-status').textContent = 'Jolpica 積分資料：抓取於 ' + cachedText;
+    el('standings-time').textContent = 'Jolpica 積分快取資料，抓取於 ' + cachedText;
     return;
   }
   try {
@@ -395,14 +400,18 @@ async function loadStandings() {
       apiFetch('/driverStandings.json'),
       apiFetch('/constructorStandings.json')
     ]);
+    const fetchedAt = Date.now();
     const d = results[0].MRData.StandingsTable.StandingsLists[0]
                 ? results[0].MRData.StandingsTable.StandingsLists[0].DriverStandings : [];
     const c = results[1].MRData.StandingsTable.StandingsLists[0]
                 ? results[1].MRData.StandingsTable.StandingsLists[0].ConstructorStandings : [];
     setCache('f1_s26', { d: d, c: c });
     renderStandings(d, c);
-    el('standings-time').textContent = '更新時間：' + new Date().toLocaleString('zh-TW');
+    const fetchedText = formatLocalDateTime(fetchedAt);
+    el('jolpica-status').textContent = 'Jolpica 積分資料：抓取於 ' + fetchedText;
+    el('standings-time').textContent = 'Jolpica 積分更新時間：' + fetchedText;
   } catch (e) {
+    el('jolpica-status').textContent = 'Jolpica 積分資料：抓取失敗';
     el('err-standings').innerHTML = '<div class="error-box">積分載入失敗：' + e.message + ' <a href="#" onclick="loadStandings();return false">重試</a></div>';
     el('tb-drivers').innerHTML = '';
     el('tb-constructors').innerHTML = '';
