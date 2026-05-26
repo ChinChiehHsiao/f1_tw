@@ -1,66 +1,30 @@
 {
-  "updated": "2026-05-26T13:14:15.000437+00:00",
+  "updated": "2026-05-26T13:28:52.311674+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
-    "FirstPractice": "愛爾達體育MAX8台",
-    "SprintQualifying": "愛爾達體育1台",
-    "Sprint": "愛爾達體育1台",
-    "Qualifying": "愛爾達體育2台",
-    "Race": "愛爾達體育4台",
-    "SecondPractice": "愛爾達體育MAX8台",
-    "ThirdPractice": "愛爾達體育MAX8台"
+    "FirstPractice": "體育MAX8台",
+    "SecondPractice": "體育MAX8台",
+    "ThirdPractice": "體育MAX8台",
+    "Qualifying": "體育2台",
+    "Race": "體育4台"
   },
   "sessions": {
     "FirstPractice": {
       "channel_number": 547,
-      "channel_name": "愛爾達體育MAX8台",
+      "channel_name": "體育MAX8台",
       "is_max": true,
+      "event": "摩納哥站",
       "desc": "摩納哥站 第1節自由練習 (英文解說原音) LIVE",
       "start_time": 1780658100,
       "is_original": true,
       "is_kids": false
     },
-    "SprintQualifying": {
-      "channel_number": 101,
-      "channel_name": "愛爾達體育1台",
-      "is_max": false,
-      "desc": "加拿大站 衝刺排位賽 (英文解說無廣告) LIVE",
-      "start_time": 1779480900,
-      "is_original": false,
-      "is_kids": false
-    },
-    "Sprint": {
-      "channel_number": 101,
-      "channel_name": "愛爾達體育1台",
-      "is_max": false,
-      "desc": "加拿大站 衝刺賽 LIVE",
-      "start_time": 1779551100,
-      "is_original": false,
-      "is_kids": false
-    },
-    "Qualifying": {
-      "channel_number": 105,
-      "channel_name": "愛爾達體育2台",
-      "is_max": false,
-      "desc": "摩納哥站 排位賽 LIVE",
-      "start_time": 1780752600,
-      "is_original": false,
-      "is_kids": false
-    },
-    "Race": {
-      "channel_number": 115,
-      "channel_name": "愛爾達體育4台",
-      "is_max": false,
-      "desc": "摩納哥站 正賽 LIVE",
-      "start_time": 1780835400,
-      "is_original": false,
-      "is_kids": false
-    },
     "SecondPractice": {
       "channel_number": 547,
-      "channel_name": "愛爾達體育MAX8台",
+      "channel_name": "體育MAX8台",
       "is_max": true,
+      "event": "摩納哥站",
       "desc": "摩納哥站 第2節自由練習 (英文解說原音) LIVE",
       "start_time": 1780670700,
       "is_original": true,
@@ -68,11 +32,32 @@
     },
     "ThirdPractice": {
       "channel_number": 547,
-      "channel_name": "愛爾達體育MAX8台",
+      "channel_name": "體育MAX8台",
       "is_max": true,
+      "event": "摩納哥站",
       "desc": "摩納哥站 第3節自由練習 (英文解說原音) LIVE",
       "start_time": 1780740900,
       "is_original": true,
+      "is_kids": false
+    },
+    "Qualifying": {
+      "channel_number": 105,
+      "channel_name": "體育2台",
+      "is_max": false,
+      "event": "摩納哥站",
+      "desc": "摩納哥站 排位賽 LIVE",
+      "start_time": 1780752600,
+      "is_original": false,
+      "is_kids": false
+    },
+    "Race": {
+      "channel_number": 115,
+      "channel_name": "體育4台",
+      "is_max": false,
+      "event": "摩納哥站",
+      "desc": "摩納哥站 正賽 LIVE",
+      "start_time": 1780835400,
+      "is_original": false,
       "is_kids": false
     }
   }
