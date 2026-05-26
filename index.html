@@ -27,8 +27,8 @@
 }}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;max-width:720px;margin:0 auto}
 header{border-bottom:0.5px solid var(--border);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-header h1{font-size:15px;font-weight:500}
-.sub{font-size:11px;color:var(--text2);margin-top:2px}
+header h1{font-size:20px;font-weight:500}
+.sub{font-size:8px;color:var(--text2);margin-top:2px}
 .tabs{display:flex;gap:5px;padding:10px 18px;border-bottom:0.5px solid var(--border);overflow-x:auto}
 .tab{background:transparent;border:0.5px solid var(--border2);border-radius:var(--radius);padding:5px 12px;font-size:13px;color:var(--text2);cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .12s}
 .tab.active{background:var(--bg2);color:var(--text);font-weight:500}
@@ -162,7 +162,7 @@ a:hover{text-decoration:underline}
         <tbody id="tb-nextrace"><tr><td colspan="4" class="loading">載入中...</td></tr></tbody>
       </table>
     </div>
-    <div class="note">轉播資料來源為 <a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">HamiVideo 愛爾達運動節目表</a>，適用於 <a href="https://hamivideo.hinet.net/%E9%9B%BB%E8%A6%96%E9%81%8B%E5%8B%95%E9%A4%A8/%E5%85%A8%E9%83%A8.do" target="_blank">HamiVideo 電視運動館方案</a>。GitHub Action 每天台灣時間 00:00 抓取，先選離抓取當下最近的未來 F1 站別，再顯示該站各場次；時間為 HamiVideo 開播時間，無資料時才顯示 Jolpica session 時間。</div>
+    <div class="note">轉播資料來源為 <a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">愛爾達運動節目表</a>，適用於 <a href="https://hamivideo.hinet.net/%E9%9B%BB%E8%A6%96%E9%81%8B%E5%8B%95%E9%A4%A8/%E5%85%A8%E9%83%A8.do" target="_blank">HamiVideo 電視運動館方案</a>。GitHub Action 每天台灣時間 00:00 抓取，先選離抓取當下最近的未來 F1 站別，再顯示該站各場次；時間為 HamiVideo 開播時間，無資料時才顯示 Jolpica session 時間。</div>
   </div>
 
   <div class="panel" id="panel-guide">
@@ -186,7 +186,7 @@ a:hover{text-decoration:underline}
     <div class="section-label">資料來源與更新</div>
     <div class="card card-body" style="line-height:2;color:var(--text2)">
       積分 / 賽程：<a href="https://api.jolpi.ca/ergast/f1/" target="_blank">Jolpica F1 API</a>，瀏覽器直接抓取；積分快取 1 小時，賽程快取 24 小時<br>
-      轉播資訊：<a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">HamiVideo 愛爾達運動節目表</a>，適用於 <a href="https://hamivideo.hinet.net/%E9%9B%BB%E8%A6%96%E9%81%8B%E5%8B%95%E9%A4%A8/%E5%85%A8%E9%83%A8.do" target="_blank">HamiVideo 電視運動館方案</a>；由 GitHub Action 每天台灣時間 00:00 抓取並更新 elta.json<br>
+      轉播資訊：<a href="https://eltaott.tv/channel/sports_program_detail#F1" target="_blank">愛爾達運動節目表</a>，適用於 <a href="https://hamivideo.hinet.net/%E9%9B%BB%E8%A6%96%E9%81%8B%E5%8B%95%E9%A4%A8/%E5%85%A8%E9%83%A8.do" target="_blank">HamiVideo 電視運動館方案</a>；由 GitHub Action 每天台灣時間 00:00 抓取並更新 elta.json<br>
       轉播邏輯：先選離抓取當下最近的未來 F1 站別，再從同一站內挑選 FP / 排位 / 正賽 / 衝刺場次；同場次優先顯示非 MAX、非原音、非 Kids 的頻道<br>
       時間顯示：轉播頁優先顯示 HamiVideo 開播時間；沒有轉播資料時，才顯示 Jolpica session 時間並加註
     </div>
