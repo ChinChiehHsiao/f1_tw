@@ -54,6 +54,8 @@ tr:hover td{background:var(--bg2)}
 .b-no{background:var(--gray-bg);color:var(--gray-text)}
 .b-sprint{background:var(--amber-bg);color:var(--amber-text)}
 .dim{color:var(--text2);font-size:12px}
+.time-cell{white-space:normal;line-height:1.35}
+.time-note{display:block;color:var(--text2);font-size:10px;font-weight:400}
 .loading{color:var(--text2);font-size:13px;padding:18px;text-align:center}
 .error-box{color:var(--red-text);background:var(--red-bg);border-radius:var(--radius);padding:10px 14px;font-size:13px;margin-bottom:10px}
 .next-hd{background:var(--green-bg);border-radius:var(--radius);padding:10px 14px;margin-bottom:10px}
@@ -149,7 +151,7 @@ a:hover{text-decoration:underline}
       <table>
         <thead><tr>
           <th>場次</th>
-          <th style="width:118px">台灣時間</th>
+          <th style="width:132px">台灣時間</th>
           <th style="width:120px">頻道</th>
           <th style="width:52px">可看？</th>
         </tr></thead>
@@ -239,6 +241,7 @@ const SESSION_LABEL = {
 };
 const SESSION_ORDER = ['FirstPractice','SecondPractice','ThirdPractice','SprintQualifying','Sprint','Qualifying','Race'];
 let ELTA_CHANNELS = null; // 從 elta.json 載入
+let ELTA_SESSIONS = null; // 從 elta.json 載入，含頻道與愛爾達開播時間
 const DAYS = ['日','一','二','三','四','五','六'];
 const BASE = 'https://api.jolpi.ca/ergast/f1/2026';
 
@@ -251,18 +254,29 @@ async function loadEltaChannels() {
     if (r.ok) {
       const data = await r.json();
       ELTA_CHANNELS = data.channels || null;
+      ELTA_SESSIONS = data.sessions || null;
       console.log('[ELTA] 頻道資料載入成功', data.updated || '');
     } else {
       console.warn('[ELTA] elta.json 回傳', r.status);
       ELTA_CHANNELS = null;
+      ELTA_SESSIONS = null;
     }
   } catch (e) {
     console.warn('[ELTA] 無法載入 elta.json:', e.message);
     ELTA_CHANNELS = null;
+    ELTA_SESSIONS = null;
   }
 }
 
+function getEltaSession(sessionKey) {
+  return ELTA_SESSIONS && ELTA_SESSIONS[sessionKey] ? ELTA_SESSIONS[sessionKey] : null;
+}
+
 function getChannel(sessionKey) {
+  const session = getEltaSession(sessionKey);
+  if (session && session.channel_name) {
+    return session.channel_name;
+  }
   if (ELTA_CHANNELS && ELTA_CHANNELS[sessionKey]) {
     return ELTA_CHANNELS[sessionKey];
   }
@@ -287,6 +301,25 @@ function toTW(dateStr, timeStr) {
   const h = String(t.getUTCHours()).padStart(2, '0');
   const mi = String(t.getUTCMinutes()).padStart(2, '0');
   return m + '/' + d + '(' + DAYS[t.getUTCDay()] + ') ' + h + ':' + mi;
+}
+
+function timestampToTW(ts) {
+  const sec = Number(ts);
+  if (!sec) return null;
+  const t = new Date(sec * 1000 + 8 * 3600000);
+  const m = t.getUTCMonth() + 1, d = t.getUTCDate();
+  const h = String(t.getUTCHours()).padStart(2, '0');
+  const mi = String(t.getUTCMinutes()).padStart(2, '0');
+  return m + '/' + d + '(' + DAYS[t.getUTCDay()] + ') ' + h + ':' + mi;
+}
+
+function broadcastTime(sessionKey, fallbackDate, fallbackTime) {
+  const session = getEltaSession(sessionKey);
+  const eltaTime = session ? timestampToTW(session.start_time) : null;
+  if (eltaTime) {
+    return { text: eltaTime, note: '' };
+  }
+  return { text: toTW(fallbackDate, fallbackTime), note: 'session 時間' };
 }
 
 function fmtDate(s) {
@@ -462,6 +495,7 @@ function renderNext(races) {
     const ch = getChannel(s.key);
     const avail = isAvailable(ch);
     const past = isPast(s.date, s.time);
+    const time = broadcastTime(s.key, s.date, s.time);
     const dim = past ? 'opacity:.4' : '';
     var chCell, badgeCell;
     if (noData || !ch) {
@@ -476,7 +510,7 @@ function renderNext(races) {
     }
     return '<tr style="' + dim + '">'
       + '<td>' + (SESSION_LABEL[s.key] || s.key) + '</td>'
-      + '<td style="font-size:12px;font-weight:' + (avail && !past && !noData ? 500 : 400) + '">' + toTW(s.date, s.time) + '</td>'
+      + '<td class="time-cell" style="font-size:12px;font-weight:' + (avail && !past && !noData ? 500 : 400) + '">' + time.text + (time.note ? '<span class="time-note">' + time.note + '</span>' : '') + '</td>'
       + '<td style="font-size:12px">' + chCell + '</td>'
       + '<td>' + badgeCell + '</td>'
       + '</tr>';
