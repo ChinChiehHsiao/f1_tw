@@ -1,10 +1,11 @@
 {
-  "updated": "2026-05-26T08:49:48.147810+00:00",
+  "updated": "2026-05-26T08:58:20.001340+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
+    "SprintQualifying": "愛爾達體育1台",
     "Sprint": "愛爾達體育1台",
-    "Qualifying": "愛爾達體育1台",
-    "Race": "ch110"
+    "Qualifying": "愛爾達體育5台",
+    "Race": "愛爾達體育15台"
   }
 }
