@@ -244,6 +244,12 @@ const SESSION_LABEL = {
   Race:            '正賽'
 };
 const SESSION_ORDER = ['FirstPractice','SecondPractice','ThirdPractice','SprintQualifying','Sprint','Qualifying','Race'];
+const CHANNEL_LINKS = {
+  '體育1台': 'https://hamivideo.hinet.net/channel/OTT_LIVE_0000001744.do?fav',
+  '體育2台': 'https://hamivideo.hinet.net/channel/OTT_LIVE_0000001743.do?fav',
+  '體育3台': 'https://hamivideo.hinet.net/channel/OTT_LIVE_0000001745.do?fav',
+  '體育4台': 'https://hamivideo.hinet.net/channel/OTT_LIVE_0000002055.do?fav'
+};
 let ELTA_CHANNELS = null; // 從 elta.json 載入
 let ELTA_SESSIONS = null; // 從 elta.json 載入，含頻道與愛爾達開播時間
 const DAYS = ['日','一','二','三','四','五','六'];
@@ -309,6 +315,13 @@ function getChannel(sessionKey) {
 function isAvailable(ch) {
   if (!ch) return false;
   return !ch.includes('MAX');
+}
+
+function channelHtml(ch) {
+  if (!ch) return '';
+  const href = CHANNEL_LINKS[ch];
+  if (!href) return ch;
+  return '<a href="' + href + '" target="_blank">' + ch + '</a>';
 }
 
 function raceName(name) {
@@ -529,10 +542,10 @@ function renderNext(races) {
       chCell = '<span style="color:var(--text2);font-size:11px">待更新</span>';
       badgeCell = '<span class="badge b-no" style="opacity:.5">?</span>';
     } else if (avail) {
-      chCell = ch;
+      chCell = channelHtml(ch);
       badgeCell = '<span class="badge b-ok">✓ 可看</span>';
     } else {
-      chCell = ch;
+      chCell = channelHtml(ch);
       badgeCell = '<span class="badge b-no">✗ 無法</span>';
     }
     return '<tr style="' + dim + '">'
