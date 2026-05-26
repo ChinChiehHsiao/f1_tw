@@ -1,13 +1,11 @@
 {
-  "updated": "2026-05-26T09:14:22.390058+00:00",
+  "updated": "2026-05-26T09:41:23.187546+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
-  "race_name": "摩納哥站",
   "channels": {
-    "FirstPractice": "愛爾達體育MAX8台",
-    "SecondPractice": "愛爾達體育MAX8台",
-    "ThirdPractice": "愛爾達體育MAX8台",
-    "Qualifying": "愛爾達體育5台",
-    "Race": "愛爾達體育15台"
+    "SprintQualifying": "愛爾達體育1台",
+    "Sprint": "愛爾達體育1台",
+    "Qualifying": "愛爾達體育2台",
+    "Race": "愛爾達體育4台"
   }
 }
