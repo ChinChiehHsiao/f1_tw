@@ -76,6 +76,13 @@ flowchart LR
 - `elta.json`：轉播資訊快取資料
 - `.github/workflows/scrape.yml`：每天自動更新轉播資訊的 GitHub Action
 
+## 流量監測
+
+使用 [GoatCounter](https://www.goatcounter.com/) 追蹤網站流量，無 Cookie、不追蹤個人身份。
+
+- 追蹤內容：頁面瀏覽次數、訪客來源、瀏覽器、裝置、地區
+- 隱私：無 Cookie，不儲存個人資料
+
 ## 部署
 
 本專案使用 GitHub Pages 部署。只要 push 到 `main` branch，GitHub Pages 會自動更新網站。
