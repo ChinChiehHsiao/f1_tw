@@ -86,3 +86,8 @@ flowchart LR
 Email：jayabc321@gmail.com  
 GitHub repo：https://github.com/ChinChiehHsiao/f1_tw  
 問題回報：https://github.com/ChinChiehHsiao/f1_tw/issues
+
+## 狀態
+
+建立時間：2026.05.26
+最後更新：2026.05.27
