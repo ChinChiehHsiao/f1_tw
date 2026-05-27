@@ -1,4 +1,4 @@
-# F1 台灣賽程查詢器 2026
+# Formula 1 2026 台灣賽程查詢器
 
 網址：https://chinchiehhsiao.github.io/f1_tw
 
