@@ -1,4 +1,4 @@
-# F1 台灣車迷報表 2026
+# F1 台灣車迷賽程查詢器 2026
 
 網址：https://chinchiehhsiao.github.io/f1_tw
 
