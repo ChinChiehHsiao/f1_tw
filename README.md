@@ -89,5 +89,5 @@ GitHub repo：https://github.com/ChinChiehHsiao/f1_tw
 
 ## 狀態
 
-建立時間：2026.05.26
+建立時間：2026.05.26  
 最後更新：2026.05.27
