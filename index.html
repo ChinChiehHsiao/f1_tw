@@ -71,9 +71,20 @@ tr:hover td{background:var(--bg2)}
 .btn:hover{background:var(--bg2)}
 a{color:var(--green);text-decoration:none}
 a:hover{text-decoration:underline}
+.col-num{width:32px}
+.col-driver{width:190px}
+.col-driver-team{width:120px}
+.col-pts{width:44px;text-align:right}
+.col-date{width:48px}
+.col-racetime{width:116px}
+.col-cal-status{width:48px}
+.col-broadcast-time{width:96px}
+.col-channel{width:93px}
+.col-watch{width:56px}
 @media(max-width:480px){
   .stat-grid{grid-template-columns:1fr 1fr}
   header{flex-direction:column;align-items:flex-start}
+  .col-driver-team{width:60px}
 }
 </style>
 </head>
@@ -108,10 +119,10 @@ a:hover{text-decoration:underline}
     <div class="card">
       <table>
         <thead><tr>
-          <th style="width:32px">#</th>
-          <th style="width:190px">車手</th>
-          <th style="width:60px">車隊</th>
-          <th style="width:44px;text-align:right">分</th>
+          <th class="col-num">#</th>
+          <th class="col-driver">車手</th>
+          <th class="col-driver-team">車隊</th>
+          <th class="col-pts">分</th>
           <th></th>
         </tr></thead>
         <tbody id="tb-drivers"><tr><td colspan="5" class="loading">載入中...</td></tr></tbody>
@@ -121,9 +132,9 @@ a:hover{text-decoration:underline}
     <div class="card">
       <table>
         <thead><tr>
-          <th style="width:32px">#</th>
+          <th class="col-num">#</th>
           <th>車隊</th>
-          <th style="width:44px;text-align:right">分</th>
+          <th class="col-pts">分</th>
           <th></th>
         </tr></thead>
         <tbody id="tb-constructors"><tr><td colspan="4" class="loading">載入中...</td></tr></tbody>
@@ -136,11 +147,11 @@ a:hover{text-decoration:underline}
     <div class="card">
       <table>
         <thead><tr>
-          <th style="width:32px">#</th>
+          <th class="col-num">#</th>
           <th>賽站</th>
-          <th style="width:48px">日期</th>
-          <th style="width:116px">正賽台灣時間</th>
-          <th style="width:48px"></th>
+          <th class="col-date">日期</th>
+          <th class="col-racetime">正賽台灣時間</th>
+          <th class="col-cal-status"></th>
         </tr></thead>
         <tbody id="tb-calendar"><tr><td colspan="5" class="loading">載入中...</td></tr></tbody>
       </table>
@@ -156,9 +167,9 @@ a:hover{text-decoration:underline}
       <table>
         <thead><tr>
           <th>場次</th>
-          <th style="width:96px">台灣時間</th>
-          <th style="width:93px">頻道</th>
-          <th style="width:56px">可看？</th>
+          <th class="col-broadcast-time">台灣時間</th>
+          <th class="col-channel">頻道</th>
+          <th class="col-watch">可看？</th>
         </tr></thead>
         <tbody id="tb-nextrace"><tr><td colspan="4" class="loading">載入中...</td></tr></tbody>
       </table>
