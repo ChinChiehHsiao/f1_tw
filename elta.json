@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-04T18:05:34.100801+00:00",
+  "updated": "2026-06-05T17:43:55.802245+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -46,7 +46,7 @@
       "is_max": false,
       "event": "摩納哥站",
       "desc": "摩納哥站 排位賽 LIVE",
-      "start_time": 1780752600,
+      "start_time": 1780753500,
       "is_original": false,
       "is_kids": false
     },
