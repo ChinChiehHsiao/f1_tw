@@ -1,22 +1,21 @@
 {
-  "updated": "2026-06-13T17:05:58.529260+00:00",
+  "updated": "2026-06-14T17:04:51.916258+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
-    "ThirdPractice": "體育MAX5台",
-    "Qualifying": "體育2台",
-    "Race": "體育3台"
+    "Qualifying": "體育3台",
+    "Race": "體育1台"
   },
   "sessions": {
     "FirstPractice": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "加泰隆尼亞站",
-      "desc": "加泰隆尼亞站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1781262900,
+      "event": "奧地利站",
+      "desc": "奧地利站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1782472500,
       "is_original": true,
       "is_kids": false
     },
@@ -24,39 +23,29 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "加泰隆尼亞站",
-      "desc": "加泰隆尼亞站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1781275500,
-      "is_original": true,
-      "is_kids": false
-    },
-    "ThirdPractice": {
-      "channel_number": 544,
-      "channel_name": "體育MAX5台",
-      "is_max": true,
-      "event": "加泰隆尼亞站",
-      "desc": "加泰隆尼亞站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1781345700,
+      "event": "奧地利站",
+      "desc": "奧地利站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1782485100,
       "is_original": true,
       "is_kids": false
     },
     "Qualifying": {
-      "channel_number": 105,
-      "channel_name": "體育2台",
+      "channel_number": 110,
+      "channel_name": "體育3台",
       "is_max": false,
-      "event": "加泰隆尼亞站",
-      "desc": "加泰隆尼亞站 排位賽 LIVE",
-      "start_time": 1781358300,
+      "event": "奧地利站",
+      "desc": "奧地利站 排位賽 LIVE",
+      "start_time": 1782567900,
       "is_original": false,
       "is_kids": false
     },
     "Race": {
-      "channel_number": 110,
-      "channel_name": "體育3台",
+      "channel_number": 101,
+      "channel_name": "體育1台",
       "is_max": false,
-      "event": "加泰隆尼亞站",
-      "desc": "加泰隆尼亞站 正賽 LIVE",
-      "start_time": 1781440200,
+      "event": "奧地利站",
+      "desc": "奧地利站 正賽 LIVE",
+      "start_time": 1782649800,
       "is_original": false,
       "is_kids": false
     }
