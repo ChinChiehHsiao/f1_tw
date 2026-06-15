@@ -2,8 +2,8 @@ name: F1 比賽前通知
 
 on:
   schedule:
-    # 每週一 02:00 UTC = 台灣時間 10:00
-    - cron: '0 2 * * 1'
+    - cron: '0 2 * * 1'  # 週一 10:00 台灣時間
+    - cron: '0 2 * * 4'  # 週四 10:00 台灣時間
   workflow_dispatch:
     inputs:
       force_notify:
