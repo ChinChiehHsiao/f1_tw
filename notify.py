@@ -194,25 +194,18 @@ def build_no_race_bubble(next_race, days_until, ref_dt):
                 {"type": "text", "text": f"R{round_num} {name}站", "size": "lg", "weight": "bold", "color": "#1a1a18"},
                 {"type": "separator", "color": "#f0ede8", "margin": "md"},
                 {
-                    "type": "box", "layout": "horizontal", "margin": "md",
+                    "type": "box", "layout": "vertical",
+                    "backgroundColor": "#f5f4f0", "cornerRadius": "8px",
+                    "paddingAll": "12px", "margin": "md",
                     "contents": [
                         {
-                            "type": "box", "layout": "vertical",
-                            "flex": 0,
-                            "backgroundColor": "#f5f4f0", "cornerRadius": "8px",
-                            "paddingAll": "12px",
+                            "type": "box", "layout": "horizontal",
                             "contents": [
-                                {
-                                    "type": "box", "layout": "horizontal",
-                                    "contents": [
-                                        {"type": "text", "text": str(days_until), "size": "3xl", "weight": "bold", "color": "#1a1a18", "flex": 0},
-                                        {"type": "text", "text": " 天後排位賽",   "size": "sm",  "color": "#5F5E5A", "gravity": "bottom"}
-                                    ]
-                                },
-                                {"type": "text", "text": fmt_tw(ref_dt), "size": "sm", "color": "#9c9a92"}
+                                {"type": "text", "text": str(days_until), "size": "3xl", "weight": "bold", "color": "#1a1a18", "flex": 0},
+                                {"type": "text", "text": " 天後排位賽",   "size": "sm",  "color": "#5F5E5A", "gravity": "bottom"}
                             ]
                         },
-                        {"type": "filler"}
+                        {"type": "text", "text": fmt_tw(ref_dt), "size": "sm", "color": "#9c9a92"}
                     ]
                 }
             ]
