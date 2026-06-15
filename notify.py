@@ -113,13 +113,23 @@ def session_row(label, time_str, channel):
             "type": "box",
             "layout": "vertical",
             "justifyContent": "center",
+            "alignItems": "flex-end",
             "contents": [{
-                "type": "text",
-                "text": channel,
-                "size": "xs",
-                "color": "#1D9E75",
-                "align": "end",
-                "weight": "bold"
+                "type": "box",
+                "layout": "vertical",
+                "backgroundColor": "#E1F5EE",
+                "cornerRadius": "20px",
+                "paddingTop": "2px",
+                "paddingBottom": "2px",
+                "paddingStart": "8px",
+                "paddingEnd": "8px",
+                "contents": [{
+                    "type": "text",
+                    "text": channel,
+                    "size": "xs",
+                    "color": "#1D9E75",
+                    "weight": "bold"
+                }]
             }]
         })
     return [row, {"type": "separator", "color": "#f0ede8"}]
