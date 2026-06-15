@@ -260,14 +260,11 @@ def main():
         ref_dt = parse_dt_tw(q['date'], q['time']) if q else parse_dt_tw(race['date'], race.get('time', ''))
         if ref_dt < now_tw:
             continue
-        if ref_dt.date() <= week_end and this_week is None:
+        if ref_dt.date() <= week_end:
             this_week = race
-        elif this_week is not None and next_race is None:
+        else:
             next_race = race
-            break
-        elif this_week is None and next_race is None:
-            next_race = race
-            break
+        break
 
     if this_week:
         alt_text, bubble = build_race_bubble(this_week, elta)
