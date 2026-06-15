@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE 圖卡預覽</title>
+<style>
+body {
+  background: #e5ddd5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: flex;
+  gap: 24px;
+  padding: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  width: 300px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+/* ── 有賽事 ── */
+.header-race {
+  background: #1D9E75;
+  padding: 16px;
+  color: #fff;
+}
+.header-race .tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  opacity: .85;
+  margin-bottom: 4px;
+}
+.header-race .title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.header-race .subtitle {
+  font-size: 12px;
+  opacity: .8;
+}
+
+/* ── 季末 ── */
+.header-end {
+  background: #5F5E5A;
+  padding: 16px;
+}
+.header-end .tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+  color: rgba(255,255,255,0.7);
+}
+.header-end .title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.header-end .subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ── 無賽事 ── */
+.header-none {
+  background: #E8002D;
+  padding: 16px;
+  border-bottom: none;
+}
+.header-none .tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+  color: rgba(255,255,255,0.8);
+}
+.header-none .title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Body ── */
+.body {
+  padding: 14px 16px;
+}
+
+.session {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 0.5px solid #f0ede8;
+}
+.session:last-child {
+  border-bottom: none;
+}
+.session-left .session-label {
+  font-size: 11px;
+  color: #9c9a92;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.session-left .session-time {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a18;
+}
+.session-right .channel {
+  font-size: 12px;
+  color: #1D9E75;
+  font-weight: 500;
+  background: #E1F5EE;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.session-right .no-channel {
+  font-size: 11px;
+  color: #c0beb8;
+}
+
+.next-info {
+  padding: 4px 0 8px;
+}
+.next-info .next-label {
+  font-size: 11px;
+  color: #9c9a92;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.next-info .next-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a18;
+  margin-bottom: 8px;
+}
+.countdown {
+  display: inline-block;
+  background: #f5f4f0;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #5F5E5A;
+}
+.countdown span {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a18;
+  margin-right: 4px;
+}
+
+/* ── Footer 按鈕 ── */
+.footer {
+  border-top: 0.5px solid #f0ede8;
+}
+.footer a {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1D9E75;
+  text-decoration: none;
+}
+.footer a:hover {
+  background: #f5fdf9;
+}
+
+.sprint-badge {
+  display: inline-block;
+  font-size: 10px;
+  background: #FAEEDA;
+  color: #633806;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.label-title {
+  font-size: 11px;
+  color: #9c9a92;
+  font-weight: 500;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+</style>
+</head>
+<body>
+
+<!-- 有賽事 -->
+<div class="card">
+  <div class="header-race">
+    <div class="tag">🏎️ 本週 F1</div>
+    <div class="title">R6 摩納哥站</div>
+    <div class="subtitle">Circuit de Monaco</div>
+  </div>
+  <div class="body">
+    <div class="session">
+      <div class="session-left">
+        <div class="session-label">排位賽</div>
+        <div class="session-time">6/6(六) 22:00</div>
+      </div>
+      <div class="session-right">
+        <div class="channel">體育2台</div>
+      </div>
+    </div>
+    <div class="session">
+      <div class="session-left">
+        <div class="session-label">正賽</div>
+        <div class="session-time">6/7(日) 21:00</div>
+      </div>
+      <div class="session-right">
+        <div class="channel">體育4台</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="#">查看完整資訊 →</a>
+  </div>
+</div>
+
+<!-- 有賽事（衝刺週）-->
+<div class="card">
+  <div class="header-race">
+    <div class="tag">🏎️ 本週 F1</div>
+    <div class="title">R5 加拿大站 <span class="sprint-badge">衝刺週</span></div>
+    <div class="subtitle">Circuit Gilles Villeneuve</div>
+  </div>
+  <div class="body">
+    <div class="session">
+      <div class="session-left">
+        <div class="session-label">衝刺排位</div>
+        <div class="session-time">5/23(六) 03:30</div>
+      </div>
+      <div class="session-right">
+        <div class="channel">體育2台</div>
+      </div>
+    </div>
+    <div class="session">
+      <div class="session-left">
+        <div class="session-label">衝刺賽</div>
+        <div class="session-time">5/24(日) 02:00</div>
+      </div>
+      <div class="session-right">
+        <div class="channel">體育3台</div>
+      </div>
+    </div>
+    <div class="session">
+      <div class="session-left">
+        <div class="session-label">排位賽</div>
+        <div class="session-time">5/24(日) 05:30</div>
+      </div>
+      <div class="session-right">
+        <div class="channel">體育2台</div>
+      </div>
+    </div>
+    <div class="session">
+      <div class="session-left">
+        <div class="session-label">正賽</div>
+        <div class="session-time">5/25(一) 04:00</div>
+      </div>
+      <div class="session-right">
+        <div class="channel">體育4台</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="#">查看完整資訊 →</a>
+  </div>
+</div>
+
+<!-- 無賽事 -->
+<div class="card">
+  <div class="header-none">
+    <div class="tag">🏁 本週 F1</div>
+    <div class="title">本週無賽事</div>
+  </div>
+  <div class="body">
+    <div class="next-info">
+      <div class="next-label">下一站</div>
+      <div class="next-name">R8 奧地利站</div>
+      <div class="countdown"><span>12</span>天後排位賽<br><small>6/27(六) 21:00</small></div>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="#">查看完整資訊 →</a>
+  </div>
+</div>
+
+<!-- 季末 -->
+<div class="card">
+  <div class="header-end">
+    <div class="tag">🏁 2026 F1</div>
+    <div class="title">抓無未來資料</div>
+    <div class="subtitle">自動判定賽季結束</div>
+  </div>
+  <div class="body">
+    <div class="next-info">
+      <div class="next-label">2026 賽季</div>
+      <div class="next-name">共 24 站</div>
+    </div>
+  </div>
+  <div class="footer">
+    <a href="#">查看完整資訊 →</a>
+  </div>
+</div>
+
+</body>
+</html>
