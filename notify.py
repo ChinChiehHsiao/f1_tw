@@ -81,13 +81,16 @@ def footer():
         "type": "box",
         "layout": "vertical",
         "paddingAll": "0px",
-        "contents": [{
-            "type": "button",
-            "action": {"type": "uri", "label": "查看完整資訊 →", "uri": SITE_URL},
-            "color": "#1D9E75",
-            "style": "link",
-            "height": "sm"
-        }]
+        "contents": [
+            {"type": "separator", "color": "#f0ede8"},
+            {
+                "type": "button",
+                "action": {"type": "uri", "label": "查看完整資訊 →", "uri": SITE_URL},
+                "color": "#1D9E75",
+                "style": "link",
+                "height": "sm"
+            }
+        ]
     }
 
 def session_row(label, time_str, channel):
@@ -192,7 +195,6 @@ def build_no_race_bubble(next_race, days_until, ref_dt):
             "contents": [
                 {"type": "text", "text": "下一站",               "size": "xs", "color": "#9c9a92"},
                 {"type": "text", "text": f"R{round_num} {name}站", "size": "lg", "weight": "bold", "color": "#1a1a18"},
-                {"type": "separator", "color": "#f0ede8", "margin": "md"},
                 {
                     "type": "box", "layout": "vertical",
                     "backgroundColor": "#f5f4f0", "cornerRadius": "8px",
