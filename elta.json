@@ -1,10 +1,11 @@
 {
-  "updated": "2026-06-17T18:07:13.304897+00:00",
+  "updated": "2026-06-18T18:19:18.153879+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
+    "ThirdPractice": "體育MAX5台",
     "Qualifying": "體育3台",
     "Race": "體育1台"
   },
@@ -26,6 +27,16 @@
       "event": "奧地利站",
       "desc": "奧地利站 第2節自由練習 (英文解說原音) LIVE",
       "start_time": 1782485100,
+      "is_original": true,
+      "is_kids": false
+    },
+    "ThirdPractice": {
+      "channel_number": 544,
+      "channel_name": "體育MAX5台",
+      "is_max": true,
+      "event": "奧地利站",
+      "desc": "奧地利站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1782555300,
       "is_original": true,
       "is_kids": false
     },
