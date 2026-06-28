@@ -1,12 +1,12 @@
 {
-  "updated": "2026-06-27T16:52:38.666577+00:00",
+  "updated": "2026-06-28T16:54:11.893981+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
-    "SecondPractice": "體育MAX5台",
-    "ThirdPractice": "體育MAX5台",
-    "Qualifying": "體育3台",
+    "SprintQualifying": "體育1台",
+    "Sprint": "體育2台",
+    "Qualifying": "體育1台",
     "Race": "體育1台"
   },
   "sessions": {
@@ -14,39 +14,39 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "奧地利站",
-      "desc": "奧地利站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1782472500,
+      "event": "英國站",
+      "desc": "英國站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1783077300,
       "is_original": true,
       "is_kids": false
     },
-    "SecondPractice": {
-      "channel_number": 544,
-      "channel_name": "體育MAX5台",
-      "is_max": true,
-      "event": "奧地利站",
-      "desc": "奧地利站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1782485100,
+    "SprintQualifying": {
+      "channel_number": 101,
+      "channel_name": "體育1台",
+      "is_max": false,
+      "event": "英國站",
+      "desc": "英國站 衝刺排位賽 (原音) LIVE",
+      "start_time": 1783089900,
       "is_original": true,
       "is_kids": false
     },
-    "ThirdPractice": {
-      "channel_number": 544,
-      "channel_name": "體育MAX5台",
-      "is_max": true,
-      "event": "奧地利站",
-      "desc": "奧地利站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1782555300,
-      "is_original": true,
+    "Sprint": {
+      "channel_number": 105,
+      "channel_name": "體育2台",
+      "is_max": false,
+      "event": "英國站",
+      "desc": "英國站 衝刺賽 LIVE",
+      "start_time": 1783160100,
+      "is_original": false,
       "is_kids": false
     },
     "Qualifying": {
-      "channel_number": 110,
-      "channel_name": "體育3台",
+      "channel_number": 101,
+      "channel_name": "體育1台",
       "is_max": false,
-      "event": "奧地利站",
-      "desc": "奧地利站 排位賽 LIVE",
-      "start_time": 1782567900,
+      "event": "英國站",
+      "desc": "英國站 排位賽 LIVE",
+      "start_time": 1783172700,
       "is_original": false,
       "is_kids": false
     },
@@ -54,9 +54,9 @@
       "channel_number": 101,
       "channel_name": "體育1台",
       "is_max": false,
-      "event": "奧地利站",
-      "desc": "奧地利站 正賽 LIVE",
-      "start_time": 1782649800,
+      "event": "英國站",
+      "desc": "英國站 正賽 LIVE",
+      "start_time": 1783258200,
       "is_original": false,
       "is_kids": false
     }
