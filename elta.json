@@ -1,11 +1,11 @@
 {
-  "updated": "2026-06-30T17:44:49.464374+00:00",
+  "updated": "2026-07-01T17:44:30.671673+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SprintQualifying": "體育1台",
-    "Sprint": "體育2台",
+    "Sprint": "體育1台",
     "Qualifying": "體育1台",
     "Race": "體育1台"
   },
@@ -26,17 +26,17 @@
       "is_max": false,
       "event": "英國站",
       "desc": "英國站 衝刺排位賽 (原音) LIVE",
-      "start_time": 1783089900,
+      "start_time": 1783091700,
       "is_original": true,
       "is_kids": false
     },
     "Sprint": {
-      "channel_number": 105,
-      "channel_name": "體育2台",
+      "channel_number": 101,
+      "channel_name": "體育1台",
       "is_max": false,
       "event": "英國站",
       "desc": "英國站 衝刺賽 LIVE",
-      "start_time": 1783160100,
+      "start_time": 1783161900,
       "is_original": false,
       "is_kids": false
     },
@@ -46,7 +46,7 @@
       "is_max": false,
       "event": "英國站",
       "desc": "英國站 排位賽 LIVE",
-      "start_time": 1783172700,
+      "start_time": 1783176300,
       "is_original": false,
       "is_kids": false
     },
