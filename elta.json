@@ -1,62 +1,62 @@
 {
-  "updated": "2026-07-04T16:47:29.197945+00:00",
+  "updated": "2026-07-05T16:50:55.256302+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
-    "SprintQualifying": "體育1台",
-    "Sprint": "體育1台",
+    "SecondPractice": "體育MAX5台",
+    "ThirdPractice": "體育MAX5台",
     "Qualifying": "體育1台",
-    "Race": "體育1台"
+    "Race": "體育3台"
   },
   "sessions": {
     "FirstPractice": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "英國站",
-      "desc": "英國站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1783077300,
+      "event": "比利時站",
+      "desc": "比利時站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1784283300,
       "is_original": true,
       "is_kids": false
     },
-    "SprintQualifying": {
-      "channel_number": 101,
-      "channel_name": "體育1台",
-      "is_max": false,
-      "event": "英國站",
-      "desc": "英國站 衝刺排位賽 (原音) LIVE",
-      "start_time": 1783091700,
+    "SecondPractice": {
+      "channel_number": 544,
+      "channel_name": "體育MAX5台",
+      "is_max": true,
+      "event": "比利時站",
+      "desc": "比利時站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1784297700,
       "is_original": true,
       "is_kids": false
     },
-    "Sprint": {
-      "channel_number": 101,
-      "channel_name": "體育1台",
-      "is_max": false,
-      "event": "英國站",
-      "desc": "英國站 衝刺賽 LIVE",
-      "start_time": 1783161900,
-      "is_original": false,
+    "ThirdPractice": {
+      "channel_number": 544,
+      "channel_name": "體育MAX5台",
+      "is_max": true,
+      "event": "比利時站",
+      "desc": "比利時站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1784367900,
+      "is_original": true,
       "is_kids": false
     },
     "Qualifying": {
       "channel_number": 101,
       "channel_name": "體育1台",
       "is_max": false,
-      "event": "英國站",
-      "desc": "英國站 排位賽 LIVE",
-      "start_time": 1783176300,
+      "event": "比利時站",
+      "desc": "比利時站 排位賽 LIVE",
+      "start_time": 1784382300,
       "is_original": false,
       "is_kids": false
     },
     "Race": {
-      "channel_number": 101,
-      "channel_name": "體育1台",
+      "channel_number": 110,
+      "channel_name": "體育3台",
       "is_max": false,
-      "event": "英國站",
-      "desc": "英國站 正賽 LIVE",
-      "start_time": 1783258200,
+      "event": "比利時站",
+      "desc": "比利時站 正賽 LIVE",
+      "start_time": 1784464200,
       "is_original": false,
       "is_kids": false
     }
