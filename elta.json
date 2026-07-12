@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-11T16:39:02.711805+00:00",
+  "updated": "2026-07-12T16:41:14.017778+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -16,7 +16,7 @@
       "is_max": true,
       "event": "比利時站",
       "desc": "比利時站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1784283300,
+      "start_time": 1784286900,
       "is_original": true,
       "is_kids": false
     },
@@ -26,7 +26,7 @@
       "is_max": true,
       "event": "比利時站",
       "desc": "比利時站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1784297700,
+      "start_time": 1784299500,
       "is_original": true,
       "is_kids": false
     },
@@ -36,7 +36,7 @@
       "is_max": true,
       "event": "比利時站",
       "desc": "比利時站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1784367900,
+      "start_time": 1784369700,
       "is_original": true,
       "is_kids": false
     },
