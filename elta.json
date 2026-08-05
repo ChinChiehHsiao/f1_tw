@@ -1,19 +1,30 @@
 {
-  "updated": "2026-07-28T17:14:34.509432+00:00",
+  "updated": "2026-08-05T17:15:12.662616+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
-    "Race": "體育2台"
+    "FirstPractice": "體育MAX5台",
+    "SprintQualifying": "體育MAX4台"
   },
   "sessions": {
-    "Race": {
-      "channel_number": 105,
-      "channel_name": "體育2台",
-      "is_max": false,
-      "event": "匈牙利站",
-      "desc": "匈牙利站 正賽 LIVE",
-      "start_time": 1785069000,
-      "is_original": false,
+    "FirstPractice": {
+      "channel_number": 544,
+      "channel_name": "體育MAX5台",
+      "is_max": true,
+      "event": "荷蘭站",
+      "desc": "荷蘭站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1787307300,
+      "is_original": true,
+      "is_kids": false
+    },
+    "SprintQualifying": {
+      "channel_number": 543,
+      "channel_name": "體育MAX4台",
+      "is_max": true,
+      "event": "荷蘭站",
+      "desc": "荷蘭站 衝刺排位賽 (英文解說原音) LIVE",
+      "start_time": 1787321700,
+      "is_original": true,
       "is_kids": false
     }
   }
