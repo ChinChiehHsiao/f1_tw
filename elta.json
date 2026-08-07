@@ -1,10 +1,13 @@
 {
-  "updated": "2026-08-05T17:15:12.662616+00:00",
+  "updated": "2026-08-07T16:38:00.386863+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
-    "SprintQualifying": "體育MAX4台"
+    "SprintQualifying": "體育MAX4台",
+    "Sprint": "體育MAX4台",
+    "Qualifying": "體育2台",
+    "Race": "體育3台"
   },
   "sessions": {
     "FirstPractice": {
@@ -25,6 +28,36 @@
       "desc": "荷蘭站 衝刺排位賽 (英文解說原音) LIVE",
       "start_time": 1787321700,
       "is_original": true,
+      "is_kids": false
+    },
+    "Sprint": {
+      "channel_number": 543,
+      "channel_name": "體育MAX4台",
+      "is_max": true,
+      "event": "荷蘭站",
+      "desc": "荷蘭站 衝刺賽 (中文解說無廣告) LIVE",
+      "start_time": 1787391900,
+      "is_original": false,
+      "is_kids": false
+    },
+    "Qualifying": {
+      "channel_number": 105,
+      "channel_name": "體育2台",
+      "is_max": false,
+      "event": "荷蘭站",
+      "desc": "荷蘭站 排位賽 LIVE",
+      "start_time": 1787406300,
+      "is_original": false,
+      "is_kids": false
+    },
+    "Race": {
+      "channel_number": 110,
+      "channel_name": "體育3台",
+      "is_max": false,
+      "event": "荷蘭站",
+      "desc": "荷蘭站 正賽 LIVE",
+      "start_time": 1787488200,
+      "is_original": false,
       "is_kids": false
     }
   }
