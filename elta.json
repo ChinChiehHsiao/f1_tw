@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16T16:09:06.217225+00:00",
+  "updated": "2026-08-17T16:11:55.754773+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -7,7 +7,7 @@
     "SprintQualifying": "體育MAX4台",
     "Sprint": "體育MAX4台",
     "Qualifying": "體育2台",
-    "Race": "體育3台"
+    "Race": "體育2台"
   },
   "sessions": {
     "FirstPractice": {
@@ -51,8 +51,8 @@
       "is_kids": false
     },
     "Race": {
-      "channel_number": 110,
-      "channel_name": "體育3台",
+      "channel_number": 105,
+      "channel_name": "體育2台",
       "is_max": false,
       "event": "荷蘭站",
       "desc": "荷蘭站 正賽 LIVE",
