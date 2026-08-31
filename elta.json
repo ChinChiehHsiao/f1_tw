@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30T18:51:45.737227+00:00",
+  "updated": "2026-08-31T21:08:39.595848+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -16,7 +16,7 @@
       "is_max": true,
       "event": "義大利站",
       "desc": "義大利站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1788520500,
+      "start_time": 1788516900,
       "is_original": true,
       "is_kids": false
     },
@@ -26,7 +26,7 @@
       "is_max": true,
       "event": "義大利站",
       "desc": "義大利站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1788533100,
+      "start_time": 1788529500,
       "is_original": true,
       "is_kids": false
     },
