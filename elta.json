@@ -1,12 +1,12 @@
 {
-  "updated": "2026-09-05T17:44:49.801048+00:00",
+  "updated": "2026-09-06T17:48:26.076304+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
     "ThirdPractice": "體育MAX5台",
-    "Qualifying": "體育1台",
+    "Qualifying": "體育4台",
     "Race": "體育1台"
   },
   "sessions": {
@@ -14,9 +14,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "義大利站",
-      "desc": "義大利站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1788516900,
+      "event": "西班牙站",
+      "desc": "西班牙站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1789125300,
       "is_original": true,
       "is_kids": false
     },
@@ -24,9 +24,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "義大利站",
-      "desc": "義大利站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1788529500,
+      "event": "西班牙站",
+      "desc": "西班牙站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1789137900,
       "is_original": true,
       "is_kids": false
     },
@@ -34,19 +34,19 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "義大利站",
-      "desc": "義大利站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1788603300,
+      "event": "西班牙站",
+      "desc": "西班牙站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1789208100,
       "is_original": true,
       "is_kids": false
     },
     "Qualifying": {
-      "channel_number": 101,
-      "channel_name": "體育1台",
+      "channel_number": 115,
+      "channel_name": "體育4台",
       "is_max": false,
-      "event": "義大利站",
-      "desc": "義大利站 排位賽 LIVE",
-      "start_time": 1788615900,
+      "event": "西班牙站",
+      "desc": "西班牙站 排位賽 LIVE",
+      "start_time": 1789220700,
       "is_original": false,
       "is_kids": false
     },
@@ -54,9 +54,9 @@
       "channel_number": 101,
       "channel_name": "體育1台",
       "is_max": false,
-      "event": "義大利站",
-      "desc": "義大利站 正賽 LIVE",
-      "start_time": 1788697800,
+      "event": "西班牙站",
+      "desc": "西班牙站 正賽 LIVE",
+      "start_time": 1789302600,
       "is_original": false,
       "is_kids": false
     }
