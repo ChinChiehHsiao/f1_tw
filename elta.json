@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-12T17:54:45.001680+00:00",
+  "updated": "2026-09-13T18:22:27.136204+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -7,16 +7,16 @@
     "SecondPractice": "體育MAX5台",
     "ThirdPractice": "體育MAX5台",
     "Qualifying": "體育4台",
-    "Race": "體育1台"
+    "Race": "體育4台"
   },
   "sessions": {
     "FirstPractice": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "西班牙站",
-      "desc": "西班牙站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1789125300,
+      "event": "亞塞拜然站",
+      "desc": "亞塞拜然站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1790237700,
       "is_original": true,
       "is_kids": false
     },
@@ -24,9 +24,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "西班牙站",
-      "desc": "西班牙站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1789137900,
+      "event": "亞塞拜然站",
+      "desc": "亞塞拜然站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1790250300,
       "is_original": true,
       "is_kids": false
     },
@@ -34,9 +34,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "西班牙站",
-      "desc": "西班牙站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1789208100,
+      "event": "亞塞拜然站",
+      "desc": "亞塞拜然站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1790324100,
       "is_original": true,
       "is_kids": false
     },
@@ -44,19 +44,19 @@
       "channel_number": 115,
       "channel_name": "體育4台",
       "is_max": false,
-      "event": "西班牙站",
-      "desc": "西班牙站 排位賽 LIVE",
-      "start_time": 1789220700,
+      "event": "亞塞拜然站",
+      "desc": "亞塞拜然站 排位賽 LIVE",
+      "start_time": 1790336700,
       "is_original": false,
       "is_kids": false
     },
     "Race": {
-      "channel_number": 101,
-      "channel_name": "體育1台",
+      "channel_number": 115,
+      "channel_name": "體育4台",
       "is_max": false,
-      "event": "西班牙站",
-      "desc": "西班牙站 正賽 LIVE",
-      "start_time": 1789302600,
+      "event": "亞塞拜然站",
+      "desc": "亞塞拜然站 正賽 LIVE",
+      "start_time": 1790418600,
       "is_original": false,
       "is_kids": false
     }
