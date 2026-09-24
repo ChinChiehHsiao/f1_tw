@@ -1,11 +1,11 @@
 {
-  "updated": "2026-09-23T19:20:54.505183+00:00",
+  "updated": "2026-09-24T19:32:11.403336+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
-    "ThirdPractice": "體育MAX5台",
+    "ThirdPractice": "體育MAX10台",
     "Qualifying": "體育4台",
     "Race": "體育4台"
   },
@@ -31,8 +31,8 @@
       "is_kids": false
     },
     "ThirdPractice": {
-      "channel_number": 544,
-      "channel_name": "體育MAX5台",
+      "channel_number": 549,
+      "channel_name": "體育MAX10台",
       "is_max": true,
       "event": "亞塞拜然站",
       "desc": "亞塞拜然站 第3節自由練習 (英文解說原音) LIVE",
