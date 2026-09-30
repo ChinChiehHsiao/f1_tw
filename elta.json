@@ -1,12 +1,12 @@
 {
-  "updated": "2026-09-29T20:16:42.255656+00:00",
+  "updated": "2026-09-30T20:21:25.836873+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
     "ThirdPractice": "體育MAX5台",
-    "Qualifying": "體育1台",
+    "Qualifying": "體育3台",
     "Race": "體育2台"
   },
   "sessions": {
@@ -41,8 +41,8 @@
       "is_kids": false
     },
     "Qualifying": {
-      "channel_number": 101,
-      "channel_name": "體育1台",
+      "channel_number": 110,
+      "channel_name": "體育3台",
       "is_max": false,
       "event": "巴林站",
       "desc": "巴林站(馬來西亞雪邦賽道) 排位賽 LIVE",
