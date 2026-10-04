@@ -1,62 +1,62 @@
 {
-  "updated": "2026-10-03T18:51:03.979571+00:00",
+  "updated": "2026-10-04T18:50:37.471840+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
-    "SecondPractice": "體育MAX5台",
-    "ThirdPractice": "體育MAX5台",
-    "Qualifying": "體育3台",
-    "Race": "體育2台"
+    "SprintQualifying": "體育MAX5台",
+    "Sprint": "體育MAX5台",
+    "Qualifying": "體育4台",
+    "Race": "體育4台"
   },
   "sessions": {
     "FirstPractice": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "巴林站",
-      "desc": "巴林站(馬來西亞雪邦賽道) 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1790914500,
+      "event": "新加坡站",
+      "desc": "新加坡站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1791537300,
       "is_original": true,
       "is_kids": false
     },
-    "SecondPractice": {
+    "SprintQualifying": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "巴林站",
-      "desc": "巴林站(馬來西亞雪邦賽道) 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1790927100,
+      "event": "新加坡站",
+      "desc": "新加坡站 衝刺排位賽 (英文解說原音) LIVE",
+      "start_time": 1791549900,
       "is_original": true,
       "is_kids": false
     },
-    "ThirdPractice": {
+    "Sprint": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "巴林站",
-      "desc": "巴林站(馬來西亞雪邦賽道) 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1791000900,
+      "event": "新加坡站",
+      "desc": "新加坡站 衝刺賽(英文解說原音) LIVE",
+      "start_time": 1791623700,
       "is_original": true,
       "is_kids": false
     },
     "Qualifying": {
-      "channel_number": 110,
-      "channel_name": "體育3台",
+      "channel_number": 115,
+      "channel_name": "體育4台",
       "is_max": false,
-      "event": "巴林站",
-      "desc": "巴林站(馬來西亞雪邦賽道) 排位賽 LIVE",
-      "start_time": 1791013500,
+      "event": "新加坡站",
+      "desc": "新加坡站 排位賽 LIVE",
+      "start_time": 1791636300,
       "is_original": false,
       "is_kids": false
     },
     "Race": {
-      "channel_number": 105,
-      "channel_name": "體育2台",
+      "channel_number": 115,
+      "channel_name": "體育4台",
       "is_max": false,
-      "event": "巴林站",
-      "desc": "巴林站(馬來西亞雪邦賽道) 正賽 LIVE",
-      "start_time": 1791095400,
+      "event": "新加坡站",
+      "desc": "新加坡站 正賽 LIVE",
+      "start_time": 1791718200,
       "is_original": false,
       "is_kids": false
     }
