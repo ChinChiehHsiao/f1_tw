@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-04T18:50:37.471840+00:00",
+  "updated": "2026-10-05T22:13:13.813085+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
-    "SprintQualifying": "體育MAX5台",
-    "Sprint": "體育MAX5台",
+    "SprintQualifying": "體育4台",
+    "Sprint": "體育1台",
     "Qualifying": "體育4台",
     "Race": "體育4台"
   },
@@ -21,9 +21,9 @@
       "is_kids": false
     },
     "SprintQualifying": {
-      "channel_number": 544,
-      "channel_name": "體育MAX5台",
-      "is_max": true,
+      "channel_number": 115,
+      "channel_name": "體育4台",
+      "is_max": false,
       "event": "新加坡站",
       "desc": "新加坡站 衝刺排位賽 (英文解說原音) LIVE",
       "start_time": 1791549900,
@@ -31,13 +31,13 @@
       "is_kids": false
     },
     "Sprint": {
-      "channel_number": 544,
-      "channel_name": "體育MAX5台",
-      "is_max": true,
+      "channel_number": 101,
+      "channel_name": "體育1台",
+      "is_max": false,
       "event": "新加坡站",
-      "desc": "新加坡站 衝刺賽(英文解說原音) LIVE",
-      "start_time": 1791623700,
-      "is_original": true,
+      "desc": "新加坡站 衝刺賽 LIVE",
+      "start_time": 1791622800,
+      "is_original": false,
       "is_kids": false
     },
     "Qualifying": {
