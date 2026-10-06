@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T22:13:13.813085+00:00",
+  "updated": "2026-10-06T20:36:30.515897+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -16,7 +16,7 @@
       "is_max": true,
       "event": "新加坡站",
       "desc": "新加坡站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1791537300,
+      "start_time": 1791533700,
       "is_original": true,
       "is_kids": false
     },
@@ -26,7 +26,7 @@
       "is_max": false,
       "event": "新加坡站",
       "desc": "新加坡站 衝刺排位賽 (英文解說原音) LIVE",
-      "start_time": 1791549900,
+      "start_time": 1791548100,
       "is_original": true,
       "is_kids": false
     },
@@ -36,7 +36,7 @@
       "is_max": false,
       "event": "新加坡站",
       "desc": "新加坡站 衝刺賽 LIVE",
-      "start_time": 1791622800,
+      "start_time": 1791621900,
       "is_original": false,
       "is_kids": false
     },
