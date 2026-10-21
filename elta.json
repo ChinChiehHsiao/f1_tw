@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20T19:40:25.132601+00:00",
+  "updated": "2026-10-21T19:42:24.222191+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -26,7 +26,7 @@
       "is_max": true,
       "event": "美國站",
       "desc": "美國站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1792790100,
+      "start_time": 1792788300,
       "is_original": true,
       "is_kids": false
     },
@@ -36,7 +36,7 @@
       "is_max": true,
       "event": "美國站",
       "desc": "美國站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1792860300,
+      "start_time": 1792862100,
       "is_original": true,
       "is_kids": false
     },
@@ -56,7 +56,7 @@
       "is_max": false,
       "event": "美國站",
       "desc": "美國站 正賽 LIVE",
-      "start_time": 1792953000,
+      "start_time": 1792956600,
       "is_original": false,
       "is_kids": false
     }
