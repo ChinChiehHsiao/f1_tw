@@ -1,22 +1,21 @@
 {
-  "updated": "2026-10-25T18:34:39.449449+00:00",
+  "updated": "2026-10-26T20:46:36.242086+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
-    "ThirdPractice": "體育MAX5台",
-    "Qualifying": "體育1台",
-    "Race": "體育3台"
+    "Qualifying": "體育4台",
+    "Race": "體育2台"
   },
   "sessions": {
     "FirstPractice": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "美國站",
-      "desc": "美國站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1792775700,
+      "event": "墨西哥站",
+      "desc": "墨西哥站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1793384100,
       "is_original": true,
       "is_kids": false
     },
@@ -24,39 +23,29 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "美國站",
-      "desc": "美國站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1792788300,
-      "is_original": true,
-      "is_kids": false
-    },
-    "ThirdPractice": {
-      "channel_number": 544,
-      "channel_name": "體育MAX5台",
-      "is_max": true,
-      "event": "美國站",
-      "desc": "美國站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1792862100,
+      "event": "墨西哥站",
+      "desc": "墨西哥站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1793396700,
       "is_original": true,
       "is_kids": false
     },
     "Qualifying": {
-      "channel_number": 101,
-      "channel_name": "體育1台",
+      "channel_number": 115,
+      "channel_name": "體育4台",
       "is_max": false,
-      "event": "美國站",
-      "desc": "美國站 排位賽 LIVE",
-      "start_time": 1792874700,
+      "event": "墨西哥站",
+      "desc": "墨西哥站 排位賽 LIVE",
+      "start_time": 1793479500,
       "is_original": false,
       "is_kids": false
     },
     "Race": {
-      "channel_number": 110,
-      "channel_name": "體育3台",
+      "channel_number": 105,
+      "channel_name": "體育2台",
       "is_max": false,
-      "event": "美國站",
-      "desc": "美國站 正賽 LIVE",
-      "start_time": 1792956600,
+      "event": "墨西哥站",
+      "desc": "墨西哥站 正賽 LIVE",
+      "start_time": 1793561400,
       "is_original": false,
       "is_kids": false
     }
