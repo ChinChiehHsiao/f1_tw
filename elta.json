@@ -1,10 +1,11 @@
 {
-  "updated": "2026-10-30T20:12:20.969175+00:00",
+  "updated": "2026-10-31T19:35:51.330201+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
+    "ThirdPractice": "體育MAX5台",
     "Qualifying": "體育4台",
     "Race": "體育2台"
   },
@@ -26,6 +27,16 @@
       "event": "墨西哥站",
       "desc": "墨西哥站 第2節自由練習 (英文解說原音) LIVE",
       "start_time": 1793396700,
+      "is_original": true,
+      "is_kids": false
+    },
+    "ThirdPractice": {
+      "channel_number": 544,
+      "channel_name": "體育MAX5台",
+      "is_max": true,
+      "event": "墨西哥站",
+      "desc": "墨西哥站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1793466900,
       "is_original": true,
       "is_kids": false
     },
