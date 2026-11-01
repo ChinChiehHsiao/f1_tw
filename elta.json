@@ -1,12 +1,12 @@
 {
-  "updated": "2026-10-31T19:35:51.330201+00:00",
+  "updated": "2026-11-01T19:55:39.275088+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
     "FirstPractice": "體育MAX5台",
     "SecondPractice": "體育MAX5台",
     "ThirdPractice": "體育MAX5台",
-    "Qualifying": "體育4台",
+    "Qualifying": "體育2台",
     "Race": "體育2台"
   },
   "sessions": {
@@ -14,9 +14,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "墨西哥站",
-      "desc": "墨西哥站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1793384100,
+      "event": "巴西站",
+      "desc": "巴西站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1793978100,
       "is_original": true,
       "is_kids": false
     },
@@ -24,9 +24,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "墨西哥站",
-      "desc": "墨西哥站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1793396700,
+      "event": "巴西站",
+      "desc": "巴西站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1793990700,
       "is_original": true,
       "is_kids": false
     },
@@ -34,19 +34,19 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "墨西哥站",
-      "desc": "墨西哥站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1793466900,
+      "event": "巴西站",
+      "desc": "巴西站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1794060900,
       "is_original": true,
       "is_kids": false
     },
     "Qualifying": {
-      "channel_number": 115,
-      "channel_name": "體育4台",
+      "channel_number": 105,
+      "channel_name": "體育2台",
       "is_max": false,
-      "event": "墨西哥站",
-      "desc": "墨西哥站 排位賽 LIVE",
-      "start_time": 1793479500,
+      "event": "巴西站",
+      "desc": "巴西站 排位賽 LIVE",
+      "start_time": 1794073500,
       "is_original": false,
       "is_kids": false
     },
@@ -54,9 +54,9 @@
       "channel_number": 105,
       "channel_name": "體育2台",
       "is_max": false,
-      "event": "墨西哥站",
-      "desc": "墨西哥站 正賽 LIVE",
-      "start_time": 1793561400,
+      "event": "巴西站",
+      "desc": "巴西站 正賽 LIVE",
+      "start_time": 1794156300,
       "is_original": false,
       "is_kids": false
     }
