@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T23:15:16.611129+00:00",
+  "updated": "2026-11-03T21:18:52.081349+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -56,7 +56,7 @@
       "is_max": false,
       "event": "巴西站",
       "desc": "巴西站 正賽 LIVE",
-      "start_time": 1794156300,
+      "start_time": 1794156600,
       "is_original": false,
       "is_kids": false
     }
