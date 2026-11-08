@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T19:41:47.079135+00:00",
+  "updated": "2026-11-08T20:00:15.412807+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -14,9 +14,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "巴西站",
-      "desc": "巴西站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1793978100,
+      "event": "拉斯維加斯站",
+      "desc": "拉斯維加斯站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1795133700,
       "is_original": true,
       "is_kids": false
     },
@@ -24,9 +24,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "巴西站",
-      "desc": "巴西站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1793990700,
+      "event": "拉斯維加斯站",
+      "desc": "拉斯維加斯站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1795146300,
       "is_original": true,
       "is_kids": false
     },
@@ -34,9 +34,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "巴西站",
-      "desc": "巴西站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1794060900,
+      "event": "拉斯維加斯站",
+      "desc": "拉斯維加斯站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1795220100,
       "is_original": true,
       "is_kids": false
     },
@@ -44,9 +44,9 @@
       "channel_number": 105,
       "channel_name": "體育2台",
       "is_max": false,
-      "event": "巴西站",
-      "desc": "巴西站 排位賽 LIVE",
-      "start_time": 1794073500,
+      "event": "拉斯維加斯站",
+      "desc": "拉斯維加斯站 排位賽 LIVE",
+      "start_time": 1795232700,
       "is_original": false,
       "is_kids": false
     },
@@ -54,9 +54,9 @@
       "channel_number": 105,
       "channel_name": "體育2台",
       "is_max": false,
-      "event": "巴西站",
-      "desc": "巴西站 正賽 LIVE",
-      "start_time": 1794156600,
+      "event": "拉斯維加斯站",
+      "desc": "拉斯維加斯站 正賽 LIVE",
+      "start_time": 1795318200,
       "is_original": false,
       "is_kids": false
     }
