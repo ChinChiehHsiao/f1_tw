@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T21:15:04.440835+00:00",
+  "updated": "2026-11-22T21:20:23.789803+00:00",
   "source": "https://piceltaott-elta.cdn.hinet.net/production/json/program_list/sports_live_program_list.json",
   "scraped": true,
   "channels": {
@@ -7,16 +7,16 @@
     "SecondPractice": "體育MAX5台",
     "ThirdPractice": "體育MAX5台",
     "Qualifying": "體育2台",
-    "Race": "體育2台"
+    "Race": "體育3台"
   },
   "sessions": {
     "FirstPractice": {
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "拉斯維加斯站",
-      "desc": "拉斯維加斯站 第1節自由練習 (英文解說原音) LIVE",
-      "start_time": 1795133700,
+      "event": "卡達站",
+      "desc": "卡達站 第1節自由練習 (英文解說原音) LIVE",
+      "start_time": 1795785300,
       "is_original": true,
       "is_kids": false
     },
@@ -24,9 +24,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "拉斯維加斯站",
-      "desc": "拉斯維加斯站 第2節自由練習 (英文解說原音) LIVE",
-      "start_time": 1795146300,
+      "event": "卡達站",
+      "desc": "卡達站 第2節自由練習 (英文解說原音) LIVE",
+      "start_time": 1795797900,
       "is_original": true,
       "is_kids": false
     },
@@ -34,9 +34,9 @@
       "channel_number": 544,
       "channel_name": "體育MAX5台",
       "is_max": true,
-      "event": "拉斯維加斯站",
-      "desc": "拉斯維加斯站 第3節自由練習 (英文解說原音) LIVE",
-      "start_time": 1795220100,
+      "event": "卡達站",
+      "desc": "卡達站 第3節自由練習 (英文解說原音) LIVE",
+      "start_time": 1795875300,
       "is_original": true,
       "is_kids": false
     },
@@ -44,19 +44,19 @@
       "channel_number": 105,
       "channel_name": "體育2台",
       "is_max": false,
-      "event": "拉斯維加斯站",
-      "desc": "拉斯維加斯站 排位賽 LIVE",
-      "start_time": 1795232700,
+      "event": "卡達站",
+      "desc": "卡達站 排位賽 LIVE",
+      "start_time": 1795887900,
       "is_original": false,
       "is_kids": false
     },
     "Race": {
-      "channel_number": 105,
-      "channel_name": "體育2台",
+      "channel_number": 110,
+      "channel_name": "體育3台",
       "is_max": false,
-      "event": "拉斯維加斯站",
-      "desc": "拉斯維加斯站 正賽 LIVE",
-      "start_time": 1795318200,
+      "event": "卡達站",
+      "desc": "卡達站 正賽 LIVE",
+      "start_time": 1795966200,
       "is_original": false,
       "is_kids": false
     }
